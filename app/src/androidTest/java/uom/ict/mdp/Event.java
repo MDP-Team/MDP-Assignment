@@ -5,7 +5,8 @@ import java.util.Date;
 /**
  * Event class. Represents a real life future event.
  */
-public class Event {
+public class Event implements Comparable<Event> {
+
 	private String name;
 	private String description;
 	private Date date;
@@ -79,4 +80,16 @@ public class Event {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+
+	@Override
+	public int compareTo(Event other) {
+		return this.name.compareTo(other.getName());
+	}
+
+	@Override
+	public String toString() {
+		return name + " @" + date.toString() + ", " + location + " (" + ageType.toString() + ")" +
+		"\n" + description;
+	}
+
 }
