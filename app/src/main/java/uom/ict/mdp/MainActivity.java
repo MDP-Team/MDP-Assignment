@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.ArrayAdapter;
+import android.wfidget.ArrayAdapter;
 
 public class MainActivity extends Activity {
 
