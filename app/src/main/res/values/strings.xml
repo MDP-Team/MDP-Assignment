@@ -4,5 +4,10 @@
     <string name="app_name">MDP</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_aboutUs">About Us</string>
+
+    <string name="filter_adult">Adult</string>
+    <string name="filter_children">Children</string>
+    <string name="filter_general_audience">General Audience</string>
 
 </resources>
