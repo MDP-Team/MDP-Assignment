@@ -4,5 +4,9 @@
         <item>Sort By Name</item>
         <item>Sort By Time</item>
         <item>Sort By Age Type</item>
+        <item>Filter Events</item>
     </array>
+
+
+
 </resources>
