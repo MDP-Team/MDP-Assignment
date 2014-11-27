@@ -58,6 +58,9 @@ public class MainActivity extends Activity {
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
 
+        /***
+         * @todo This has to change into a FRAGMENT! in order for us to switch between events
+         */
         // Declaring the List for the events in Main Menu
 
         navEventsEntries = getResources().getStringArray(R.array.nav_events_entries);
