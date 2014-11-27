@@ -7,6 +7,14 @@
         <item>Filter Events</item>
     </array>
 
+    <!--
+        Temporary Strings for the Events around Malta.
+    -->
 
+    <array name ="nav_events_entries">
+        <item> Birgu Fest</item>
+        <item> Zejt iz-Zejtun</item>
+        <item> Mdina Night</item>
+    </array>
 
 </resources>

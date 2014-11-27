@@ -1,0 +1,24 @@
+<component name="libraryTable">
+  <library name="src">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$USER_HOME$/android-sdks/extras/google/google_play_services/samples/auth/src" />
+      <root url="file://$USER_HOME$/android-sdks/extras/google/google_play_services/samples/cast/tictactoe/src" />
+      <root url="file://$USER_HOME$/android-sdks/extras/google/google_play_services/samples/cast/democastplayer/src" />
+      <root url="file://$USER_HOME$/android-sdks/extras/google/google_play_services/samples/maps/src" />
+      <root url="file://$USER_HOME$/android-sdks/extras/google/google_play_services/samples/plus/src" />
+      <root url="file://$USER_HOME$/android-sdks/extras/google/google_play_services/samples/admob/src" />
+      <root url="file://$USER_HOME$/android-sdks/extras/google/google_play_services/samples/drive/demos/src" />
+      <root url="file://$USER_HOME$/android-sdks/extras/google/google_play_services/samples/drive/playground/src" />
+      <root url="file://$USER_HOME$/android-sdks/extras/google/google_play_services/samples/drive/quickeditor/src" />
+      <root url="file://$USER_HOME$/android-sdks/extras/google/google_play_services/samples/wallet/src" />
+      <root url="file://$USER_HOME$/android-sdks/extras/google/google_play_services/samples/unified/ActivityDemo/app/src/main/java" />
+      <root url="file://$USER_HOME$/android-sdks/extras/google/google_play_services/samples/panorama/src" />
+      <root url="file://$USER_HOME$/android-sdks/extras/google/google_play_services/samples/analytics/src" />
+      <root url="file://$USER_HOME$/android-sdks/extras/google/google_play_services/samples/tagmanager/helloworld/src" />
+      <root url="file://$USER_HOME$/android-sdks/extras/google/google_play_services/samples/tagmanager/cuteanimals/src" />
+      <root url="file://$USER_HOME$/android-sdks/extras/google/google_play_services/libproject/google-play-services_lib/src" />
+    </SOURCES>
+  </library>
+</component>

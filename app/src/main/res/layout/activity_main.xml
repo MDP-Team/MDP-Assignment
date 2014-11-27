@@ -20,6 +20,14 @@
 
     />
 
+    <ListView
+        android:id = "@+id/main_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:choiceMode="singleChoice"
+        android:textAlignment="center"
+
+        />
 
 
 
