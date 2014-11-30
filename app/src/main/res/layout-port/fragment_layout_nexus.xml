@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This is just a Test Layout, since I don't own a 10.1'' tablet.
+All Fragment will be first tested on this - Dodo
+
+PORTRAIT MODE-->
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/layout_portrait">
+
+    <!-- Title -->
+    <TableRow
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableRow_event"
+        >
+
+        <TextView
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Event Title"
+            android:id="@+id/event_title"
+            android:layout_marginTop="36dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+    </TableRow>
+
+    <!-- Location -->
+    <TableRow
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableRow_location"
+        android:layout_below="@+id/tableRow_event"
+        >
+
+        <TextView
+
+            android:layout_width="310dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Street Location"
+            android:layout_marginTop="5dp"
+            android:id="@+id/location" />
+    </TableRow>
+
+
+
+    <!-- Time -->
+    <TableRow
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableRow_time"
+        android:layout_below="@+id/tableRow_location"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Start Time:"
+            android:id="@+id/time_text"
+            android:layout_below="@+id/tableRow_location" />
+
+        <TextView
+            android:layout_width="215dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="20:00"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/time"
+            android:layout_toRightOf="@+id/location" />
+    </TableRow>
+
+    <!-- Category -->
+    <TableRow
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableRow_category"
+        android:layout_below="@+id/tableRow_time" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/category_text"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Category:" />
+
+        <TextView
+            android:layout_width="225dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/category"
+            android:layout_marginLeft="5dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAlignment="textStart"
+            android:text="General Audience" />
+        />
+    </TableRow>
+
+    <!-- Show on GOOGLE MAPS location button -->
+    <TableRow
+
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableRow_google_map"
+        android:layout_below="@+id/tableRow_category">
+
+        <Button
+            android:layout_width="310dp"
+            android:layout_height="40dp"
+            android:text="Take me there!"
+            android:id="@+id/button_google_maps"
+            android:layout_below="@+id/tableRow_category"
+            />
+
+    </TableRow>
+
+    <!-- Show REDPIN  OPTIONAL! NOT ALWAYS WILL BE SHOWN -->
+
+    <TableRow
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableRow_redpin"
+        android:layout_below="@+id/tableRow_google_map">
+
+        <Button
+            android:layout_width="310dp"
+            android:layout_height="40dp"
+            android:text="Interesting Landmarks"
+            android:id="@+id/button"
+            android:layout_below="@+id/tableRow_google_map"
+
+            />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableRow_description"
+        android:layout_below="@+id/tableRow_redpin">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/textView"
+            android:layout_marginTop="30dp" />
+
+    </TableRow>
+
+
+</RelativeLayout>
