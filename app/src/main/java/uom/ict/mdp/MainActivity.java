@@ -2,6 +2,7 @@ package uom.ict.mdp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.http.AndroidHttpClient;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
@@ -12,6 +13,16 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.entity.BasicHttpEntity;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class MainActivity extends Activity {
 
@@ -77,6 +88,27 @@ public class MainActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        AndroidHttpClient http = AndroidHttpClient.newInstance("MDP-app");
+        try {
+            HttpResponse response = http.execute(new HttpGet("http://localhost"));
+            BasicHttpEntity entity = (BasicHttpEntity) response.getEntity();
+            InputStream content = entity.getContent();
+            byte[] buffer = new byte[(int) entity.getContentLength()];
+            content.read(buffer);
+            String body = new String(buffer);
+            JSONArray array = new JSONArray(body);
+            navEventsEntries = new String[array.length()];
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject object = array.getJSONObject(i);
+                navEventsEntries[i] = object.getString("eventName");
+            }
+        } catch (IOException e) {
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         return true;
     }
 
