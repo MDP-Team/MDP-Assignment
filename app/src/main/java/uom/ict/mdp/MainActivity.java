@@ -1,115 +1,94 @@
 package uom.ict.mdp;
 
 import android.app.Activity;
+
+import android.app.ActionBar;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
-import android.net.http.AndroidHttpClient;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
-import android.view.View;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.FrameLayout;
-import android.widget.ListView;
+import android.view.View;
+import android.view.ViewGroup;
+import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.entity.BasicHttpEntity;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-
-public class MainActivity extends Activity {
-
-    private String[] navDrawerEntries;
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
-
-    // Listing the Available Events in Malta (Hardcoded atm)
-
-    private FrameLayout mFrameLayout;
-    private ListView mEventsList;
-    private String[] navEventsEntries;
+import android.widget.TextView;
 
 
-    // Used With Toast for Testing Purposes
-    Toast t;
-    private Context ct;
-    CharSequence text;
-    int duration;
-
+public class MainActivity extends Activity
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
-     * @todo Create an alert dialog box on the Drawer for filtering. First click Filter then proceed to choose the options
-     *
-     * @param savedInstanceState
+     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
+    private NavigationDrawerFragment mNavigationDrawerFragment;
+
+    /**
+     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
+     */
+    private CharSequence mTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        navDrawerEntries = getResources().getStringArray(R.array.nav_drawer_entries);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        mNavigationDrawerFragment = (NavigationDrawerFragment)
+                getFragmentManager().findFragmentById(R.id.navigation_drawer);
+        mTitle = getTitle();
 
-
-        // Set the adapter for the list view of DRAWER
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, navDrawerEntries));
-        // Set the list's click listener
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
-
-        /***
-         * @todo This has to change into a FRAGMENT! in order for us to switch between events
-         */
-        // Declaring the List for the events in Main Menu
-
-        navEventsEntries = getResources().getStringArray(R.array.nav_events_entries);
-        mFrameLayout = (FrameLayout) findViewById(R.id.content_frame);
-        mEventsList = (ListView) findViewById(R.id.main_menu);
-
-
-        // Set Adapter for list view of MAIN MENU
-        mEventsList.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_expandable_list_item_1, navEventsEntries));
-        // Listener for Click
-        mEventsList.setOnItemClickListener(new MainMenuItemClickListener());
-
+        // Set up the drawer.
+        mNavigationDrawerFragment.setUp(
+                R.id.navigation_drawer,
+                (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+    public void onNavigationDrawerItemSelected(int position) {
+        // update the main content by replacing fragments
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .commit();
+    }
 
-        AndroidHttpClient http = AndroidHttpClient.newInstance("MDP-app");
-        try {
-            HttpResponse response = http.execute(new HttpGet("http://localhost"));
-            BasicHttpEntity entity = (BasicHttpEntity) response.getEntity();
-            InputStream content = entity.getContent();
-            byte[] buffer = new byte[(int) entity.getContentLength()];
-            content.read(buffer);
-            String body = new String(buffer);
-            JSONArray array = new JSONArray(body);
-            navEventsEntries = new String[array.length()];
-            for (int i = 0; i < array.length(); i++) {
-                JSONObject object = array.getJSONObject(i);
-                navEventsEntries[i] = object.getString("eventName");
-            }
-        } catch (IOException e) {
-
-        } catch (JSONException e) {
-            e.printStackTrace();
+    public void onSectionAttached(int number) {
+        switch (number) {
+            case 1:
+                mTitle = getString(R.string.title_section1);
+                break;
+            case 2:
+                mTitle = getString(R.string.title_section2);
+                break;
+            case 3:
+                mTitle = getString(R.string.title_section3);
+                break;
         }
+    }
 
-        return true;
+    public void restoreActionBar() {
+        ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setTitle(mTitle);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (!mNavigationDrawerFragment.isDrawerOpen()) {
+            // Only show items in the action bar relevant to this screen
+            // if the drawer is not showing. Otherwise, let the drawer
+            // decide what to show in the action bar.
+            getMenuInflater().inflate(R.menu.main, menu);
+            restoreActionBar();
+            return true;
+        }
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -118,118 +97,53 @@ public class MainActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-
-            ct = getApplicationContext();
-            CharSequence text = "Settings Pressed";
-            int duration = Toast.LENGTH_SHORT;
-
-            t = Toast.makeText(ct, text,duration);
-            t.show();
-
+            return true;
         }
-        else if (id == R.id.action_aboutUs)
-        {
-            ct = getApplicationContext();
-            text = "About Us Pressed";
-            duration = Toast.LENGTH_SHORT;
 
-            t = Toast.makeText(ct, text,duration);
-            t.show();
-        }
         return super.onOptionsItemSelected(item);
     }
 
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView parent, View view, int position, long id) {
-            selectItem(position);
-        }
-    }
-
-    /***
-     *  @todo different type of sorts according to button pressed
+    /**
+     * A placeholder fragment containing a simple view.
      */
+    public static class PlaceholderFragment extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        private static final String ARG_SECTION_NUMBER = "section_number";
 
-    // Testing with TOAST to see if the list items are being read
-
-    /** Swaps fragments in the main content view */
-    private void selectItem(int position) {
-
-        // position starts from 0.
-
-        switch (position)
-        {
-            case 0:
-                ct = getApplicationContext();
-                text = "Sort By Name";
-                duration = Toast.LENGTH_SHORT;
-
-                t = Toast.makeText(ct, text,duration);
-                t.show();
-                break;
-
-            case 1:
-                ct = getApplicationContext();
-                text = "Sort By Time";
-                duration = Toast.LENGTH_SHORT;
-
-                Toast t = Toast.makeText(ct, text,duration);
-                t.show();
-                break;
-
-            case 2:
-                ct = getApplicationContext();
-                CharSequence text = "Sort By Age";
-                int duration = Toast.LENGTH_SHORT;
-
-                t = Toast.makeText(ct, text,duration);
-                t.show();
-
+        /**
+         * Returns a new instance of this fragment for the given section
+         * number.
+         */
+        public static PlaceholderFragment newInstance(int sectionNumber) {
+            PlaceholderFragment fragment = new PlaceholderFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
         }
 
+        public PlaceholderFragment() {
+        }
 
-
-
-    }
-
-    private class MainMenuItemClickListener implements AdapterView.OnItemClickListener {
         @Override
-        public void onItemClick(AdapterView parent, View view, int position, long id) {
-            selectItemEvents(position);
-
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            return rootView;
         }
 
-        // Swaps Fragments
-        private void selectItemEvents(int position) {
-            switch (position) {
-                case 0:
-                    ct = getApplicationContext();
-                    text = "Birgu Fest";
-                    duration = Toast.LENGTH_SHORT;
-
-                    t = Toast.makeText(ct, text, duration);
-                    t.show();
-                    break;
-
-                case 1:
-                    ct = getApplicationContext();
-                    text = "Zejt iz-Zejtun";
-                    duration = Toast.LENGTH_SHORT;
-
-                    Toast t = Toast.makeText(ct, text, duration);
-                    t.show();
-                    break;
-
-                case 2:
-                    ct = getApplicationContext();
-                    CharSequence text = "Mdina Night";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    t = Toast.makeText(ct, text, duration);
-                    t.show();
-
-            }
+        @Override
+        public void onAttach(Activity activity) {
+            super.onAttach(activity);
+            ((MainActivity) activity).onSectionAttached(
+                    getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
+
 }
