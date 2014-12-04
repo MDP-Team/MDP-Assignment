@@ -102,9 +102,9 @@ public class NavigationDrawerFragment extends Fragment {
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
                 new String[]{
-                        getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
+                        "Sort By Time",
+                        "Sort By Name",
+                        "Sort By Category",
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -192,6 +192,20 @@ public class NavigationDrawerFragment extends Fragment {
         mCurrentSelectedPosition = position;
         if (mDrawerListView != null) {
             mDrawerListView.setItemChecked(position, true);
+            switch (position){
+                case 0:
+                    Toast.makeText(getActivity(), "This will sort by Age.", Toast.LENGTH_SHORT).show();
+                    break;
+                case 1:
+                    Toast.makeText(getActivity(), "This will sort by Name.", Toast.LENGTH_SHORT).show();
+                    break;
+                case 2:
+                    Toast.makeText(getActivity(), "This will sort by Category.", Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    Toast.makeText(getActivity(), "ERROR: NOT A VALID SELECTION .", Toast.LENGTH_SHORT).show();
+
+            }
         }
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
