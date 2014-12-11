@@ -192,7 +192,7 @@ public class NavigationDrawerFragment extends Fragment {
         mCurrentSelectedPosition = position;
         if (mDrawerListView != null) {
             mDrawerListView.setItemChecked(position, true);
-            switch (position){
+           /* switch (position){
                 case 0:
                     Toast.makeText(getActivity(), "This will sort by Age.", Toast.LENGTH_SHORT).show();
                     break;
@@ -205,7 +205,7 @@ public class NavigationDrawerFragment extends Fragment {
                 default:
                     Toast.makeText(getActivity(), "ERROR: NOT A VALID SELECTION .", Toast.LENGTH_SHORT).show();
 
-            }
+            }*/
         }
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
@@ -261,7 +261,8 @@ public class NavigationDrawerFragment extends Fragment {
             return true;
         }
 
-        if (item.getItemId() == R.id.action_example) {
+        if (item.getItemId() == R.id.action_example)
+        {
             Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
             return true;
         }

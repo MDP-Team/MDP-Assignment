@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<eventList>
+    <event>
+            <eventname> Face Painting </eventname>
+            <streetname>Triq il-Palazz Tal-Isqof </streetname>
+            <startime>  20:00 </startime>
+            <endtime>   23:00 </endtime>
+            <category>  Children </category>
+        </event>
+
+
+        <event>
+            <eventname> Fireworks  </eventname>
+            <streetname> Xatt il-Forn </streetname>
+            <startime> 23:30 </startime>
+            <endtime> 00:45 </endtime>
+            <category> General Audience </category>
+         </event>
+        <event>
+            <eventname>  The Dungeon Experience  </eventname>
+            <streetname>  Inquisitor's Palace (Palazz tal-Isqof)</streetname>
+            <startime> 20:00 </startime>
+            <endtime>  01:00 </endtime>
+            <category>   Adults  </category>
+        </event>
+
+</eventList>

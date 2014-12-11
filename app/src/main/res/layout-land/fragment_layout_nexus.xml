@@ -204,13 +204,5 @@ LANDSCAPE MODE
         android:layout_above="@+id/relativeLayout"
         android:layout_toRightOf="@+id/tableRow_event" />
 
-    <GridView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/gridView"
-        android:layout_alignTop="@+id/description_text"
-        android:layout_toLeftOf="@+id/tableRow_description"
-        android:layout_marginRight="77dp" />
-
 
 </RelativeLayout>

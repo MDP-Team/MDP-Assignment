@@ -2,19 +2,24 @@
 
 <!-- Will be used as the MAIN LAYOUT xml file. Still need to work on it -->
 
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/TEST">
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/rel_layout_all">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/rel_layout_info">
     <!-- Title -->
     <TableRow
-
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tableRow_event"
@@ -35,9 +40,8 @@
 
     <!-- Location -->
     <TableRow
-
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="30dp"
-        android:layout_centerHorizontal="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tableRow_location"
@@ -59,7 +63,7 @@
     <!-- Time -->
     <TableRow
         android:layout_marginLeft="30dp"
-        android:layout_centerHorizontal="false"
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tableRow_time"
@@ -72,7 +76,7 @@
             android:text="Start Time:"
             android:id="@+id/time_text"
             android:layout_below="@+id/tableRow_location"
-            android:textSize="28sp" />
+            android:textSize="28sp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -86,8 +90,8 @@
 
     <!-- Category -->
     <TableRow
-        android:layout_marginLeft="30dp"
-        android:layout_centerHorizontal="false"
+
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tableRow_category"
@@ -168,27 +172,55 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="28sp"
             android:text="Description"
-            android:id="@+id/description_text"
+            android:id="@+id/description_title"
             android:layout_alignBottom="@+id/tableRow_redpin"
             android:layout_alignLeft="@+id/tableRow_category" />
 
 
     </TableRow>
 
-    <TextView
+        <TextView
         android:layout_marginTop="25dp"
         android:layout_marginRight="25dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="26sp"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus neque eu nisi tempus aliquam. Aenean dictum enim quis faucibus commodo. Curabitur laoreet lorem et augue scelerisque, ut interdum erat maximus. Aliquam nec leo metus. Class aptent taciti sociosqu ad."
-
-        android:id="@+id/textView"
+        android:id="@+id/description_text"
         android:layout_below="@+id/tableRow_description"
         android:layout_alignLeft="@+id/tableRow_description"
         />
+
+    <!-- GOOGLE MAP -->
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="60dp"
+        android:layout_width="fill_parent"
+        android:layout_height="500dp"
+        android:id="@+id/rel_layout_map"
+        android:layout_below="@id/description_text">
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="60dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp"
+        android:id="@+id/rel_layout_buttons"
+        android:layout_below="@id/rel_layout_map">
+
 
     <Button
         android:layout_width="fill_parent"
@@ -196,17 +228,11 @@
         android:text="Take me there!"
         android:id="@+id/button_google_maps"
         android:textSize="26sp"
-        android:layout_below="@+id/textView"
-        android:layout_alignRight="@+id/tableRow_description"
-        android:layout_alignEnd="@+id/tableRow_description"
-        android:layout_marginTop="37dp"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
-
+        android:layout_marginTop="37dp"/>
     <Button
 
         android:layout_width="fill_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:text="Interesting Landmarks"
         android:id="@+id/button_redpin"
 
@@ -217,17 +243,8 @@
         android:layout_alignRight="@+id/button_google_maps"
         android:layout_alignEnd="@+id/button_google_maps" />
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@+id/button_redpin"
-        android:layout_alignLeft="@+id/button_redpin"
-        android:layout_alignStart="@+id/button_redpin"
-        android:layout_marginTop="55dp"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/google_maps"></RelativeLayout>
-
+    </RelativeLayout>
 
 </RelativeLayout>
+
+</ScrollView>
