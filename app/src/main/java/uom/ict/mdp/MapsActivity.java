@@ -1,7 +1,12 @@
 package uom.ict.mdp;
 
+import android.app.FragmentManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -13,19 +18,28 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity {
 
-    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    public static View view;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    private static GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    private static double latitude, longitude;
+
+    //@Override
+    protected View onCreate(LayoutInflater inflater, ViewGroup container,
+                            Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_layout_nexus);
 
-        GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-        LatLng malta = new LatLng(35.883, 14.500);
+        if (container == null)
+        {
+            view = (LinearLayout) inflater.inflate(R.layout.fragment_layout,container,false);
+            latitude = 26.78;
+            longitude = 72.56;
+        }
 
-        map.setMyLocationEnabled(true);
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(malta,13));
         setUpMapIfNeeded();
+
+        return view;
+
     }
 
     @Override
@@ -69,6 +83,16 @@ public class MapsActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(35.883, 14.500)).title("Malta"));
+        mMap.setMyLocationEnabled(true);
+        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude)).title("My Home").snippet("Home Address"));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude),12.0f));
+
+         }
+
+    public void onDestroyView()
+    {
+
     }
+
+
 }

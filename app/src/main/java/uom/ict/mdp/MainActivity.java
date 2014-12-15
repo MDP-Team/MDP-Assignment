@@ -35,6 +35,7 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
 
 
@@ -65,7 +66,7 @@ public class MainActivity extends Activity
                             "02:00",EventAgeType.GENERAL),
                     new Events (R.drawable.foodicon, "Food Stand", "Triq P.Boffa", "19:00",
                             "02:00",EventAgeType.GENERAL),
-                    new Events (R.drawable.dungeon, "Food Stand", "Triq l-Isqof", "19:00",
+                    new Events (R.drawable.dungeon, "The Dark Ages", "Triq l-Isqof", "19:00",
                             "00:00",EventAgeType.ADULT),
             };
 
@@ -77,32 +78,33 @@ public class MainActivity extends Activity
      */
     private CharSequence mTitle;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // ---- Displaying the List ---- //
 
-        // Changing the Array into a List
+        // Changing array to List
 
         for (int i=0; i<events.length; i++)
         {
             eventsList.add(events[i]);
         }
-        // Setting the Adapter to the Events List XML file
+
         ListView eventView = (ListView) findViewById(R.id.event_lists);
+        eventView.setAdapter(new EventsListAdapter(this, R.layout.events_list_item,eventsList));
+
+        // Onclick Listener
 
         eventView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, final View view,
-                                    int position, long id)
-            {
-                Toast.makeText(getApplicationContext(),"TEEEEST",Toast.LENGTH_SHORT);
-                //put code here
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String test = ("This is a test " + position);
+                Toast.makeText(getBaseContext(),test,Toast.LENGTH_SHORT).show();
             }
         });
-
-        eventView.setAdapter(new EventsListAdapter(this,R.layout.events_list_item,eventsList));
 
 
 
@@ -115,14 +117,12 @@ public class MainActivity extends Activity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-
     }
-
-
 
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
+
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
@@ -133,15 +133,15 @@ public class MainActivity extends Activity
     public void onSectionAttached(int number) {
         switch (number) {
             case 1:
-                mTitle = getString(R.string.title_section1);
+                //mTitle = getString(R.string.sort_age);
                 Toast.makeText(getApplicationContext(), "This will sort by Age.", Toast.LENGTH_SHORT).show();
 
                 break;
             case 2:
-                mTitle = getString(R.string.title_section2);
+                //mTitle = getString(R.string.sort_name);
                 break;
             case 3:
-                mTitle = getString(R.string.title_section3);
+                //mTitle = getString(R.string.sort_time);
                 break;
         }
     }
@@ -210,15 +210,17 @@ public class MainActivity extends Activity
 
 
         @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-        }
-
-        @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.events_list_item, container, false);
             return rootView;
+        }
+
+        @Override
+        public void onAttach(Activity activity) {
+            super.onAttach(activity);
+//            /*((MainActivity) activity).onSectionAttached(
+//                    getArguments().getInt(ARG_SECTION_NUMBER));*/
         }
     }
 

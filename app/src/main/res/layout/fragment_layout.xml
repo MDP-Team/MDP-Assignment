@@ -1,250 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!-- Will be used as the MAIN LAYOUT xml file. Still need to work on it -->
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:id="@+id/TEST">
+    android:layout_height="wrap_content"
+    android:id="@+id/event_info"
+    android:showDividers="none"
+    android:orientation="vertical">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/rel_layout_all">
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/rel_layout_info">
-    <!-- Title -->
-    <TableRow
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tableRow_event"
-        android:layout_alignParentTop="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Event Title"
-            android:id="@+id/event_title"
-            android:layout_marginTop="36dp"
-            android:layout_marginLeft="30dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:textSize="40sp" />
-
-    </TableRow>
-
-    <!-- Location -->
-    <TableRow
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tableRow_location"
-        android:layout_below="@+id/tableRow_event"
-        >
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Street Location"
-            android:layout_marginTop="5dp"
-            android:id="@+id/location"
-            android:textSize="28sp" />
-    </TableRow>
-
-
-
-    <!-- Time -->
-    <TableRow
-        android:layout_marginLeft="30dp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tableRow_time"
-        android:layout_below="@+id/tableRow_location"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start Time:"
-            android:id="@+id/time_text"
-            android:layout_below="@+id/tableRow_location"
-            android:textSize="28sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="20:00"
-            android:layout_marginLeft="5dp"
-            android:id="@+id/time"
-            android:layout_toRightOf="@+id/location"
-            android:textSize="28sp" />
-    </TableRow>
-
-    <!-- Category -->
-    <TableRow
-
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tableRow_category"
-        android:layout_below="@+id/tableRow_time" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/category_text"
-            android:text="Category:"
-            android:textSize="28sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/category"
-            android:layout_marginLeft="5dp"
-            android:layout_gravity="start"
-            android:textAlignment="textStart"
-            android:text="General Audience"
-            android:textSize="28sp" />
-        />
-    </TableRow>
-
-    </RelativeLayout>
-
-    <!-- Start of Rel Layout to put in the Pictures -->
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/rel_layout_pics"
-        android:layout_toRightOf="@id/rel_layout_info"
-        android:layout_alignBottom="@+id/rel_layout_info">
-
-
-
-        </RelativeLayout>
-
-
-    <!-- Show on GOOGLE MAPS location button -->
-    <TableRow
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="60dp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tableRow_google_map"
-        android:layout_below="@+id/rel_layout_info">
-
-    </TableRow>
-
-    <!-- Show REDPIN  OPTIONAL! NOT ALWAYS WILL BE SHOWN -->
-
-    <TableRow
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="60dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tableRow_redpin"
-        android:layout_below="@+id/tableRow_google_map">
-
-    </TableRow>
-
-
-    <!-- Description -->
-    <TableRow
-
+    <TextView
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="60dp"
-        android:layout_centerHorizontal="true"
+        android:id="@+id/event_name_info"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tableRow_description"
-        android:layout_below="@+id/tableRow_redpin">
-
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="28sp"
-            android:text="Description"
-            android:id="@+id/description_title"
-            android:layout_alignBottom="@+id/tableRow_redpin"
-            android:layout_alignLeft="@+id/tableRow_category" />
-
-
-    </TableRow>
-
-        <TextView
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="25dp"
+        android:text="Event"
+        android:textSize="32dp"
+        android:gravity="center_horizontal"
+        />
+    
+    <TextView
+        android:id="@+id/street_name_info"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="26sp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus neque eu nisi tempus aliquam. Aenean dictum enim quis faucibus commodo. Curabitur laoreet lorem et augue scelerisque, ut interdum erat maximus. Aliquam nec leo metus. Class aptent taciti sociosqu ad."
-        android:id="@+id/description_text"
-        android:layout_below="@+id/tableRow_description"
-        android:layout_alignLeft="@+id/tableRow_description"
+        android:text="Street"
+        android:textSize="32dp"
+        android:gravity="center_horizontal"
         />
 
-    <!-- GOOGLE MAP -->
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="60dp"
-        android:layout_width="fill_parent"
-        android:layout_height="500dp"
-        android:id="@+id/rel_layout_map"
-        android:layout_below="@id/description_text">
-
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.MapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </RelativeLayout>
-
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="60dp"
+    <TextView
+        android:id="@+id/start_time_info"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="15dp"
-        android:id="@+id/rel_layout_buttons"
-        android:layout_below="@id/rel_layout_map">
+        android:text="Start Time:"
+        android:textSize="32dp"
+        android:gravity="center_horizontal"
+        />
 
-
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="60dp"
-        android:text="Take me there!"
-        android:id="@+id/button_google_maps"
-        android:textSize="26sp"
-        android:layout_marginTop="37dp"/>
-    <Button
-
+    <TextView
+        android:id="@+id/end_time_info"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Interesting Landmarks"
-        android:id="@+id/button_redpin"
+        android:text="End Time:"
+        android:textSize="32dp"
+        android:gravity="center_horizontal"
+        />
 
-        android:textSize="26sp"
-        android:layout_below="@+id/button_google_maps"
-        android:layout_alignLeft="@+id/button_google_maps"
-        android:layout_alignStart="@+id/button_google_maps"
-        android:layout_alignRight="@+id/button_google_maps"
-        android:layout_alignEnd="@+id/button_google_maps" />
+    <TextView
+        android:id="@+id/category_info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Category:"
+        android:textSize="32dp"
+        android:gravity="center_horizontal"
+        />
 
-    </RelativeLayout>
 
-</RelativeLayout>
+    <!-- Gallery to put the images -->
 
-</ScrollView>
+    <Gallery
+        android:id="@+id/gallery_info"
+        android:layout_marginTop="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <ImageView
+        android:id="@+id/image_info"
+        android:layout_width="320dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:textSize="32dp"/>
+
+
+
+    <TextView
+        android:id="@+id/description_info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="28dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        />
+
+
+
+    <fragment
+        android:id="@+id/location_map"
+        android:layout_margin="20dp"
+        android:layout_gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="400dp"
+        class="com.google.android.gms.maps.SupportMapFragment" />
+
+    <Button
+        android:id="@+id/google_maps_info"
+        android:layout_width="fill_parent"
+        android:text="Take Me There"
+        android:layout_height="50dp"
+        />
+    <Button
+        android:id="@+id/red_pin_info"
+        android:layout_width="fill_parent"
+        android:text="Show Interesting Indoor Landmarks"
+        android:layout_height="50dp"
+        />
+</LinearLayout>

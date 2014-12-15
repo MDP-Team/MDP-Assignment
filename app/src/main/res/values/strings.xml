@@ -11,5 +11,10 @@
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_main_activity2">MainActivity2</string>
+
+    <string name="sort_age">Sort by Age</string>
+    <string name="sort_name">Sort by Name</string>
+    <string name="sort_time">Sort by Time</string>
 
 </resources>
