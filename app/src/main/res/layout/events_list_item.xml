@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/list_layout"
-    android:showDividers="none">
+    android:showDividers="middle">
 
 
     <ImageView
@@ -71,5 +71,6 @@
         android:textSize="28dp"
         />
 </LinearLayout>
+
 
 </LinearLayout>

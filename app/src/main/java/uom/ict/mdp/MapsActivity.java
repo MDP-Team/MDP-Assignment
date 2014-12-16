@@ -27,6 +27,8 @@ public class MapsActivity extends FragmentActivity {
     protected View onCreate(LayoutInflater inflater, ViewGroup container,
                             Bundle savedInstanceState)
     {
+
+
         super.onCreate(savedInstanceState);
 
         if (container == null)

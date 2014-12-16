@@ -7,6 +7,7 @@ import java.util.Date;
  */
 public class Events implements Comparable<Events> {
 
+    private int id;
     private int icon;
     private String name;
     private String description;
@@ -14,8 +15,8 @@ public class Events implements Comparable<Events> {
     private String endTime;
     private EventAgeType ageType;
     private String location;
-    private double xCoordinates;
-    private double yCoordinates;
+    private float xCoordinates;
+    private float yCoordinates;
 
 
     /**
@@ -28,16 +29,18 @@ public class Events implements Comparable<Events> {
      * @param endTime The time when event finishes
      * @param ageType The EventAgeType enum for the event's age type
      * @param location The location of the event (Street Name)
-
      *
      */
-    public Events(int icon, String name, String location, String time, String endTime, EventAgeType ageType ) {
+    public Events(int id, int icon, String name, String location, String time, String endTime, EventAgeType ageType, float xCoor, float yCoor ) {
+        this.id = id;
         this.icon = icon;
         this.name = name;
         this.location = location;
         this.time = time;
         this.endTime= endTime;
         this.ageType = ageType;
+        this.xCoordinates = xCoor;
+        this.yCoordinates = yCoor;
     }
 
     /**
@@ -53,7 +56,8 @@ public class Events implements Comparable<Events> {
      * @param yCoor The y-coordinates on the map
      *
      */
-    public Events(int icon, String name, String description, String time, String endTime, EventAgeType ageType, String location, double xCoor, double yCoor ) {
+    public Events(int id, int icon, String name, String description,String location, String time, String endTime, EventAgeType ageType, float xCoor, float yCoor ) {
+        this.id = id;
         this.icon = icon;
         this.name = name;
         this.description = description;
@@ -71,13 +75,24 @@ public class Events implements Comparable<Events> {
      * @param other The other event to copy.
      */
     public Events(Events other) {
+        this.id = new Integer(other.id);
         this.icon = new Integer(other.icon);
         this.name = new String(other.name);
         this.time = new String (other.time);
         this.endTime = new String (other.endTime);
         this.ageType = other.ageType;
         this.location = new String(other.location);
-        this.description = new String(this.description);
+        this.description = new String(other.description);
+        this.xCoordinates = new Float(other.xCoordinates);
+        this.yCoordinates = new Float(other.yCoordinates);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getIcon() { return icon; }

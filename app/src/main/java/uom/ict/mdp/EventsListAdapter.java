@@ -49,10 +49,10 @@ public class EventsListAdapter extends ArrayAdapter<Events>
 
 
         TextView eventName = (TextView) convertView.findViewById(R.id.event_name);
-        eventName.setText("Event Name: " +objects.get(position).getName());
+        eventName.setText(objects.get(position).getName());
 
         TextView streetName = (TextView) convertView.findViewById(R.id.street_name);
-        streetName.setText("Street Name: " + objects.get(position).getLocation());
+        streetName.setText("Where: " + objects.get(position).getLocation());
 
         TextView startTime = (TextView) convertView.findViewById(R.id.start_time);
         startTime.setText("Start Time: " + objects.get(position).getTime());
@@ -61,7 +61,7 @@ public class EventsListAdapter extends ArrayAdapter<Events>
         endTime.setText("End Time: " + objects.get(position).getEndTime());
 
         TextView category = (TextView) convertView.findViewById(R.id.category);
-        category.setText("Category: " + objects.get(position).getAgeType().toString());
+        category.setText("Age Group: " + objects.get(position).getAgeType().toString());
 
         if(objects.get(position).getAgeType().toString() == "Children")
         {

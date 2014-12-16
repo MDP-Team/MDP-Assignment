@@ -51,23 +51,30 @@ public class MainActivity extends Activity
     private Intent i;
     private List<Events> eventsList = new ArrayList<Events>();
 
-
+    public static String descICT = "Open Day at the ICT Building which hosts lots of activities for everybody. Games created by our development crew" +
+            " or cheeky robots and AI from the engineering and science students are for you to see and try! So come and join us in the ICT Building" +
+            "where we assured you, you will not regret it";
+    public static String descRobotica = "Robotica in the Engineering Building features Robots built by our students. Come and join us and you will have " +
+            "the opportunity to control some of our gadgets! some come and join us!";
+    public static String descFood = "All types of Food found at our canteen to satisfy that tummy of yours";
+    public static String descHistory = "Come and learn what used to happen back in the dark middle ages. Join us in " +
+            "journey, where our actors will be showing all the atrocities that used to happen. Viewers at their own discretion";
+    public static String descScience = "Explosions and tricks and fun! Come and see what us chemists do! I'm sure you kids love it!";
+    public static String musicShow = " The Best talent from our students in a music show in the Quadrangle, guaranteed to offer you a show " +
+            "better than show exists in the country!";
     /**
      *  Static Data for Testing Purposes, Will shows the Events Possible in BIRGU FEST as Rows
      */
 
     public static Events[] events = new Events[]
             {
-                    new Events(R.drawable.facepainting,"Facepainting","Triq Pacifiku Scicluna", "19:00",
-                            "23:15", EventAgeType.CHILD),
-                    new Events (R.drawable.fireworks, "Fireworks", "Triq ix-Xatt", "23:30",
-                            "01:45",EventAgeType.GENERAL),
-                    new Events (R.drawable.foodicon, "Food Stand", "Triq l-Isqof", "19:00",
-                            "02:00",EventAgeType.GENERAL),
-                    new Events (R.drawable.foodicon, "Food Stand", "Triq P.Boffa", "19:00",
-                            "02:00",EventAgeType.GENERAL),
-                    new Events (R.drawable.dungeon, "The Dark Ages", "Triq l-Isqof", "19:00",
-                            "00:00",EventAgeType.ADULT),
+                    new Events (1,R.drawable.ictb1, "ICT Open Day", descICT, "ICT Building", "08:00", "22:00",EventAgeType.GENERAL,35.901762f, 14.485334f),
+                    new Events (2,R.drawable.eng1, "Robotica", descRobotica, "Engineering Building", "08:00", "22:00",EventAgeType.GENERAL,35.90338f, 14.484725f),
+                    new Events (3,R.drawable.eng1, "Food Haven", descFood, "Canteen", "08:00", "02:00", EventAgeType.GENERAL,35.90338f, 14.484725f),
+                    new Events (4,R.drawable.eng1, "Mediveal History", descHistory, "Erin Serracino Hall", "08:00", "22:00",EventAgeType.ADULT,35.90338f, 14.484725f),
+                    new Events (5,R.drawable.eng1, "Exploding Sci", descScience, "Engineering Building", "08:00", "22:00",EventAgeType.CHILD,35.90338f, 14.484725f),
+                    new Events (6,R.drawable.eng1, "Rock on", musicShow, "Quadrangle", "08:00", "22:00",EventAgeType.GENERAL,35.90338f, 14.484725f),
+
             };
 
 
@@ -212,7 +219,7 @@ public class MainActivity extends Activity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.events_list_item, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_layout, container, false);
             return rootView;
         }
 
