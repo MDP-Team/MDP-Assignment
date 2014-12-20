@@ -53,14 +53,12 @@
         />
 
 
-    <!-- Gallery to put the images -->
+    <!-- Scrollable images  -->
 
-    <Gallery
-        android:id="@+id/gallery_info"
-        android:layout_marginTop="20dp"
+    <HorizontalScrollView
+        android:layout_margin="20dp"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="250dp">
 
     <ImageView
         android:id="@+id/image_info"
@@ -68,6 +66,8 @@
         android:layout_height="250dp"
         android:layout_gravity="center"
         android:scaleType="fitXY"/>
+
+    </HorizontalScrollView>
 
     <TextView
         android:layout_width="fill_parent"
