@@ -1,17 +1,13 @@
 package uom.ict.mdp;
 
-import android.app.FragmentManager;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -33,7 +29,7 @@ public class MapsActivity extends FragmentActivity {
 
         if (container == null)
         {
-            view = (LinearLayout) inflater.inflate(R.layout.fragment_layout,container,false);
+//            view = (LinearLayout) inflater.inflate(R.event_info_layout,container,false);
             latitude = 26.78;
             longitude = 72.56;
         }

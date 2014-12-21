@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -12,7 +16,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Event"
-        android:textSize="32dp"
+        android:textSize="50dp"
         android:gravity="center_horizontal"
         />
     
@@ -89,7 +93,7 @@
         />
 
 
-
+    <!--
     <fragment
         android:id="@+id/location_map"
         android:layout_margin="20dp"
@@ -97,6 +101,7 @@
         android:layout_width="fill_parent"
         android:layout_height="400dp"
         class="com.google.android.gms.maps.SupportMapFragment" />
+        -->
 
     <Button
         android:id="@+id/google_maps_info"
@@ -104,10 +109,5 @@
         android:text="Take Me There"
         android:layout_height="50dp"
         />
-    <Button
-        android:id="@+id/red_pin_info"
-        android:layout_width="fill_parent"
-        android:text="Show Interesting Indoor Landmarks"
-        android:layout_height="50dp"
-        />
 </LinearLayout>
+</ScrollView>

@@ -1,47 +1,23 @@
 package uom.ict.mdp;
 
 
-import android.app.Activity;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.google.android.gms.auth.GooglePlayServicesAvailabilityException;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.model.LatLng;
-import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.List;
 
 
@@ -71,6 +47,14 @@ public class MainActivity extends Activity
     /**
      *  Static Data for Testing Purposes, Will shows the Events Possible in BIRGU FEST as Rows
      */
+
+    public final static String TITLE = "title";
+    public final static String LOCATION = "location";
+    public final static String START_TIME = "start_time";
+    public final static String END_TIME = "end_time";
+    public final static String CATEGORY = "age_group";
+    public final static String DESCRIPTION = "description";
+
 
     public static Events[] events = new Events[]
             {
@@ -116,6 +100,11 @@ public class MainActivity extends Activity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String test = ("This is a test " + position);
                 Toast.makeText(getBaseContext(),test,Toast.LENGTH_SHORT).show();
+
+
+                onClickEvent(position);
+
+
             }
         });
 
@@ -148,6 +137,19 @@ public class MainActivity extends Activity
          */
     }
 
+    public void onClickEvent(int position)
+    {
+        Intent i = new Intent (this, EventInfoActivity.class);
+
+        i.putExtra(TITLE,eventsList.get(position).getName());
+        i.putExtra(LOCATION,eventsList.get(position).getLocation());
+        i.putExtra(DESCRIPTION,eventsList.get(position).getDescription());
+        i.putExtra(START_TIME,eventsList.get(position).getTime());
+        i.putExtra(END_TIME,eventsList.get(position).getEndTime());
+        i.putExtra(CATEGORY,eventsList.get(position).getAgeType().toString());
+        startActivity(i);
+
+    }
 
 
 
@@ -239,13 +241,14 @@ public class MainActivity extends Activity
         }
 
 
-
+/*
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_layout, container, false);
+            View rootView = inflater.inflate(R.layout.event_info_layout, container, false);
             return rootView;
-        }
+        }*/
+
 
         @Override
         public void onAttach(Activity activity) {
