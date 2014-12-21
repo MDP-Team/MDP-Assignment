@@ -1,13 +1,17 @@
 package uom.ict.mdp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -16,32 +20,33 @@ public class MapsActivity extends FragmentActivity {
 
     public static View view;
 
+    private MapView mMapView;
     private static GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private static double latitude, longitude;
 
-    //@Override
+
+    Bundle extra = getIntent().getExtras();
+    private float xcoor = extra.getFloat("xcoor");
+    private float ycoor = extra.getFloat("ycoor");
+
+
+
+
     protected View onCreate(LayoutInflater inflater, ViewGroup container,
                             Bundle savedInstanceState)
     {
-
-
-        super.onCreate(savedInstanceState);
-
         if (container == null)
         {
-//            view = (LinearLayout) inflater.inflate(R.event_info_layout,container,false);
-            latitude = 26.78;
-            longitude = 72.56;
+            return null;
         }
+            view = inflater.inflate(R.layout.event_info_layout, container, false);
 
         setUpMapIfNeeded();
-
         return view;
-
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         setUpMapIfNeeded();
     }
@@ -65,7 +70,7 @@ public class MapsActivity extends FragmentActivity {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
-            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.location_map))
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
@@ -82,15 +87,39 @@ public class MapsActivity extends FragmentActivity {
      */
     private void setUpMap() {
         mMap.setMyLocationEnabled(true);
-        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude)).title("My Home").snippet("Home Address"));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude),12.0f));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(xcoor,ycoor)).title("Test").snippet("Home Address"));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(xcoor,ycoor),12.0f));
 
          }
+
+    public void onViewCreated (View view, Bundle savedInstanceState)
+    {
+        if (mMap != null)
+            setUpMap();
+
+        if (mMap == null) {
+            // Try to obtain the map from the SupportMapFragment.
+            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.location_map))
+                    .getMap();
+        }
+            // Check if we were successful in obtaining the map.
+            if (mMap != null) {
+                setUpMap();
+            }
+    }
+
 
     public void onDestroyView()
     {
 
-    }
+        if (mMap !=null)
+        {
+
+            EventInfoActivity.fragmentManager.beginTransaction().remove(EventInfoActivity.fragmentManager.findFragmentById(R.id.location_map));
+            mMap=null;
+
+        }
+    }   
 
 
 }

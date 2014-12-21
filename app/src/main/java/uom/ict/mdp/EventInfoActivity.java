@@ -5,22 +5,28 @@ package uom.ict.mdp;
  */
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.widget.TextView;
 
 
 /**
  * Where all the EventInfo data will be held. Will be used as intents
  */
-public class EventInfoActivity extends Activity
+public class EventInfoActivity extends FragmentActivity
 {
+    public static FragmentManager fragmentManager;
+
     @Override
     protected void onCreate(Bundle savedInstance)
     {
         super.onCreate(savedInstance);
-
         setContentView(R.layout.event_info_layout);
+        fragmentManager = getFragmentManager();
+
+
         Intent i = getIntent();
 
         //---- Outputting the Information ---- //

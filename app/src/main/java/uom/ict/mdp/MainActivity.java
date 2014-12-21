@@ -32,6 +32,8 @@ public class MainActivity extends Activity
     private GoogleMap mGoogleMap;
     private Intent i;
     private List<Events> eventsList = new ArrayList<Events>();
+    public MapsActivity mapsActivity;
+
 
     public static String descICT = "Open Day at the ICT Building which hosts lots of activities for everybody. Games created by our development crew" +
             " or cheeky robots and AI from the engineering and science students are for you to see and try! So come and join us in the ICT Building" +
@@ -60,10 +62,10 @@ public class MainActivity extends Activity
             {
                     new Events (1,R.drawable.ictb1, "ICT Open Day", descICT, "ICT Building", "08:00", "22:00",EventAgeType.GENERAL,35.901762f, 14.485334f),
                     new Events (2,R.drawable.eng1, "Robotica", descRobotica, "Engineering Building", "08:00", "22:00",EventAgeType.GENERAL,35.90338f, 14.484725f),
-                    new Events (3,R.drawable.eng1, "Food Haven", descFood, "Canteen", "08:00", "02:00", EventAgeType.GENERAL,35.90338f, 14.484725f),
-                    new Events (4,R.drawable.eng1, "Mediveal History", descHistory, "Erin Serracino Hall", "08:00", "22:00",EventAgeType.ADULT,35.90338f, 14.484725f),
-                    new Events (5,R.drawable.eng1, "Exploding Sci", descScience, "Engineering Building", "08:00", "22:00",EventAgeType.CHILD,35.90338f, 14.484725f),
-                    new Events (6,R.drawable.eng1, "Rock on", musicShow, "Quadrangle", "08:00", "22:00",EventAgeType.GENERAL,35.90338f, 14.484725f),
+                    new Events (3,R.drawable.canteen1, "Food Haven", descFood, "Canteen", "08:00", "02:00", EventAgeType.GENERAL,35.90338f, 14.484725f),
+                    new Events (4,R.drawable.hist1, "Mediveal History", descHistory, "Erin Serracino Hall", "08:00", "22:00",EventAgeType.ADULT,35.90338f, 14.484725f),
+                    new Events (5,R.drawable.sc1, "Exploding Sci", descScience, "Engineering Building", "08:00", "22:00",EventAgeType.CHILD,35.90338f, 14.484725f),
+                    new Events (6,R.drawable.rock, "Rock on", musicShow, "Quadrangle", "08:00", "22:00",EventAgeType.GENERAL,35.90338f, 14.484725f),
 
             };
 
@@ -140,6 +142,7 @@ public class MainActivity extends Activity
     public void onClickEvent(int position)
     {
         Intent i = new Intent (this, EventInfoActivity.class);
+        Intent i2 = new Intent (this, MapsActivity.class);
 
         i.putExtra(TITLE,eventsList.get(position).getName());
         i.putExtra(LOCATION,eventsList.get(position).getLocation());
@@ -147,7 +150,12 @@ public class MainActivity extends Activity
         i.putExtra(START_TIME,eventsList.get(position).getTime());
         i.putExtra(END_TIME,eventsList.get(position).getEndTime());
         i.putExtra(CATEGORY,eventsList.get(position).getAgeType().toString());
+        i2.putExtra("xcoor", eventsList.get(position).getxCoordinates());
+        i2.putExtra("ycoor", eventsList.get(position).getyCoordinates());
+
         startActivity(i);
+
+
 
     }
 
