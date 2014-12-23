@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,6 @@ public class MainActivity extends Activity
     private GoogleMap mGoogleMap;
     private Intent i;
     private List<Events> eventsList = new ArrayList<Events>();
-    public MapsActivity mapsActivity;
 
 
     public static String descICT = "Open Day at the ICT Building which hosts lots of activities for everybody. Games created by our development crew" +
@@ -56,6 +56,9 @@ public class MainActivity extends Activity
     public final static String END_TIME = "end_time";
     public final static String CATEGORY = "age_group";
     public final static String DESCRIPTION = "description";
+    public final static String XCOOR = "xcoor";
+    public final static String YCOOR = "ycoor";
+
 
 
     public static Events[] events = new Events[]
@@ -142,7 +145,6 @@ public class MainActivity extends Activity
     public void onClickEvent(int position)
     {
         Intent i = new Intent (this, EventInfoActivity.class);
-        Intent i2 = new Intent (this, MapsActivity.class);
 
         i.putExtra(TITLE,eventsList.get(position).getName());
         i.putExtra(LOCATION,eventsList.get(position).getLocation());
@@ -150,9 +152,8 @@ public class MainActivity extends Activity
         i.putExtra(START_TIME,eventsList.get(position).getTime());
         i.putExtra(END_TIME,eventsList.get(position).getEndTime());
         i.putExtra(CATEGORY,eventsList.get(position).getAgeType().toString());
-        i2.putExtra("xcoor", eventsList.get(position).getxCoordinates());
-        i2.putExtra("ycoor", eventsList.get(position).getyCoordinates());
-
+        i.putExtra(XCOOR,eventsList.get(position).getxCoordinates());
+        i.putExtra(YCOOR,eventsList.get(position).getyCoordinates());
         startActivity(i);
 
 

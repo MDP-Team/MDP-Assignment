@@ -139,11 +139,11 @@ public class Events implements Comparable<Events> {
         this.location = location;
     }
 
-    public double getxCoordinates() {return xCoordinates;}
+    public float getxCoordinates() {return xCoordinates;}
 
     public void setxCoordinates(float xCoordinates) {this.xCoordinates = xCoordinates;}
 
-    public double  getyCoordinates() {return yCoordinates;}
+    public float  getyCoordinates() {return yCoordinates;}
 
     public void setyCoordinates(float yCoordinates) {this.yCoordinates = yCoordinates;}
 
