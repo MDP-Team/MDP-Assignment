@@ -27,6 +27,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.*;
 import com.google.android.gms.maps.*;
 
+import java.util.List;
+
 
 /**
  * Where all the EventInfo data will be held. Will be used as intents
@@ -105,17 +107,15 @@ public class EventInfoActivity extends FragmentActivity
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"" + xcoor,Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(),"" + ycoor,Toast.LENGTH_SHORT).show();
             }
         });
 
             Marker eventMarker = googleMap.addMarker(new MarkerOptions().position(eventLatLng)
                                             .title(title));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(eventLatLng, 20));
-            googleMap.animateCamera(CameraUpdateFactory.zoomTo(20), 2000, null);
-
-
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(eventLatLng, 15));
+            googleMap.animateCamera(CameraUpdateFactory.zoomTo(17), 2000, null);
+            googleMap.getUiSettings().setMapToolbarEnabled(true);
+            googleMap.getUiSettings().setZoomControlsEnabled(true);
 
 
         // This will make the Maps UI usable as without it the ScrollView would hinder every possibility
@@ -125,16 +125,9 @@ public class EventInfoActivity extends FragmentActivity
         transparentImageView = (ImageView) findViewById(R.id.transparent_image);
 
 
-
-
-
-
-
-
-
-
-
     }
+
+
 
 
 

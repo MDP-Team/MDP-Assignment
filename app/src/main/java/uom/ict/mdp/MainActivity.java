@@ -98,6 +98,8 @@ public class MainActivity extends Activity
         ListView eventView = (ListView) findViewById(R.id.event_lists);
         eventView.setAdapter(new EventsListAdapter(this, R.layout.events_list_item,eventsList));
 
+
+
         // Onclick Listener
 
         eventView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
