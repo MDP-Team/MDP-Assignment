@@ -65,10 +65,10 @@ public class MainActivity extends Activity
             {
                     new Events (1,R.drawable.ictb1, "ICT Open Day", descICT, "ICT Building", "08:00", "22:00",EventAgeType.GENERAL,35.901762f, 14.485334f),
                     new Events (2,R.drawable.eng1, "Robotica", descRobotica, "Engineering Building", "08:00", "22:00",EventAgeType.GENERAL,35.90338f, 14.484725f),
-                    new Events (3,R.drawable.canteen1, "Food Haven", descFood, "Canteen", "08:00", "02:00", EventAgeType.GENERAL,35.90338f, 14.484725f),
-                    new Events (4,R.drawable.hist1, "Mediveal History", descHistory, "Erin Serracino Hall", "08:00", "22:00",EventAgeType.ADULT,35.90338f, 14.484725f),
-                    new Events (5,R.drawable.sc1, "Exploding Sci", descScience, "Engineering Building", "08:00", "22:00",EventAgeType.CHILD,35.90338f, 14.484725f),
-                    new Events (6,R.drawable.rock, "Rock on", musicShow, "Quadrangle", "08:00", "22:00",EventAgeType.GENERAL,35.90338f, 14.484725f),
+                    new Events (3,R.drawable.canteen1, "Food Haven", descFood, "Canteen", "08:00", "02:00", EventAgeType.GENERAL,35.901705f, 14.483402f),
+                    new Events (4,R.drawable.hist1, "Mediveal History", descHistory, "Erin Serracino Hall", "08:00", "22:00",EventAgeType.ADULT,35.903254f, 14.483718f),
+                    new Events (5,R.drawable.sc1, "Exploding Sci", descScience, "Chemistry Building", "08:00", "22:00",EventAgeType.CHILD,35.902543f, 14.484306f),
+                    new Events (6,R.drawable.rock, "Rock on", musicShow, "Quadrangle", "08:00", "22:00",EventAgeType.GENERAL,35.902130f, 14.483516f),
 
             };
 

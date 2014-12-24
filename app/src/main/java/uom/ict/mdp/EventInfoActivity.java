@@ -8,12 +8,14 @@ import android.app.Activity;
 import android.app.Application;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -39,9 +41,8 @@ public class EventInfoActivity extends FragmentActivity
     private GoogleMap googleMap;
     public static FragmentManager fragmentManager;
     private Button button;
-    private ScrollView mainScrollView;
-    private ImageView transparentImageView;
 
+    private ScrollView mainScrollView;
 
     @Override
     protected void onCreate(Bundle savedInstance)
@@ -49,7 +50,21 @@ public class EventInfoActivity extends FragmentActivity
         super.onCreate(savedInstance);
         setContentView(R.layout.event_info_layout);
 
-        googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.location_map)).getMap();
+
+        // This will make the Maps UI usable as without it the ScrollView would hinder every possibility
+
+
+        googleMap = ((MapUIControls) getFragmentManager().findFragmentById(R.id.location_map)).getMap();
+        mainScrollView = (ScrollView) findViewById(R.id.main_scroll);
+        ((MapUIControls) getFragmentManager().findFragmentById(R.id.location_map)).setListener(new MapUIControls.OnTouchListener() {
+            @Override
+            public void onTouch() {
+                mainScrollView.requestDisallowInterceptTouchEvent(true);
+            }
+        });
+
+
+        // ----- Intents and data change according to the row number ---- //
 
         Intent i = getIntent();
 
@@ -59,7 +74,10 @@ public class EventInfoActivity extends FragmentActivity
         LatLng eventLatLng = new LatLng(xcoor,ycoor);
 
 
-        //---- Outputting the Information ---- //
+
+
+
+        // ---- Outputting the Information ---- //
 
         // -- Title -- //
         String title = i.getStringExtra(MainActivity.TITLE);
@@ -96,12 +114,9 @@ public class EventInfoActivity extends FragmentActivity
 
 
 
-/*
-        if (googleMap != null)
-        {
-            Marker locationMarker = googleMap.addMarker(new MarkerOptions().position())
-        }
-*/
+
+
+
         button = (Button) findViewById(R.id.google_maps_info);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -118,21 +133,11 @@ public class EventInfoActivity extends FragmentActivity
             googleMap.getUiSettings().setZoomControlsEnabled(true);
 
 
-        // This will make the Maps UI usable as without it the ScrollView would hinder every possibility
 
 
-        mainScrollView  = (ScrollView) findViewById(R.id.main_scroll);
-        transparentImageView = (ImageView) findViewById(R.id.transparent_image);
 
 
     }
-
-
-
-
-
-
-
 
 
 
