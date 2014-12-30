@@ -27,10 +27,11 @@
         <activity
             android:name="uom.ict.mdp.MainActivity"
             android:label="@string/app_name" >
-            <intent-filter>
+           <!-- <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter> -->
         </activity>
 
         <meta-data
@@ -48,10 +49,18 @@
                 android:value="uom.ict.mdp.MainActivity" />
         </fragment>
 
-        <activity android:name=".EventInfoActivity"
+        <activity
+            android:name="uom.ict.mdp.EventInfoActivity"
             android:label="EventInfoActivity" />
+        <activity
+            android:name=".Intro"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
