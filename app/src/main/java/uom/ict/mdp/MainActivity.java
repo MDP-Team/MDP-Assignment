@@ -17,9 +17,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 
+import com.microsoft.windowsazure.mobileservices.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 public class MainActivity extends Activity
@@ -32,6 +34,7 @@ public class MainActivity extends Activity
 //    private MapView mMapView;
     private GoogleMap mGoogleMap;
     private Intent i;
+    private MobileServiceClient mClient;
     private List<Events> eventsList = new ArrayList<Events>();
 
 
@@ -85,6 +88,8 @@ public class MainActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mClient = new MobileServiceClient("https://mdp.azure-mobile.net/", "iTAGFMeUoFBgptKLovQGZggHgyzEeO25", this);
 
         // ---- Displaying the List ---- //
 
