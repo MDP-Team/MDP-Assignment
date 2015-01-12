@@ -1,17 +1,22 @@
 package uom.ict.mdp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 
 public class Intro extends Activity {
+
+    public final static String EVENT_TITLE = "event";
 
     private Spinner spinner;
     private ImageView eventImage;
@@ -24,7 +29,7 @@ public class Intro extends Activity {
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this, R.array.intents, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-
+        eventImage = (ImageView) findViewById(R.id.intro_image);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
@@ -32,19 +37,21 @@ public class Intro extends Activity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
-                eventImage = (ImageView) findViewById(R.id.intro_image);
-                int eventCase = spinner.getSelectedItemPosition();
+                int eventCase = spinner.getSelectedItemPosition()+1;
 
-                switch (eventCase) {
-                    case 0:
+
+                switch (eventCase)
+                {
+                    case 1:
                         eventImage.setImageDrawable(getResources().getDrawable(R.drawable.nottebianca));
                         break;
-                    case 1:
+                    case 2:
+                        eventImage.setImageDrawable(getResources().getDrawable(R.drawable.birgu));
+                        break;
+                    case 3:
                         eventImage.setImageDrawable(getResources().getDrawable(R.drawable.birgu));
                         break;
             }
-
-
         }
 
             @Override
@@ -54,6 +61,12 @@ public class Intro extends Activity {
             }
 
         });
+
+        //Intent on The images
+
+
+
+
     }
 
 
@@ -82,4 +95,22 @@ public class Intro extends Activity {
     }
 
 
+    public void imageClick(View v) {
+        int pos = spinner.getSelectedItemPosition() + 1;
+        Intent i = new Intent(this,MainActivity.class);
+
+        switch (pos) {
+            case 1:
+                Toast.makeText(getBaseContext(),""+spinner.getSelectedItemId(),Toast.LENGTH_SHORT).show();
+                i.putExtra(EVENT_TITLE, spinner.getSelectedItemPosition());
+                startActivity(i);
+                break;
+            case 2:
+                Toast.makeText(getBaseContext(),""+spinner.getSelectedItemId(),Toast.LENGTH_SHORT).show();
+                i.putExtra(EVENT_TITLE, spinner.getSelectedItemPosition());
+                startActivity(i);
+                break;
+        }
+
+    }
 }

@@ -48,8 +48,8 @@ public class EventInfoActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstance)
     {
         super.onCreate(savedInstance);
+		setTitle("Event Details");
         setContentView(R.layout.event_info_layout);
-
 
         // This will make the Maps UI usable as without it the ScrollView would hinder every possibility
 

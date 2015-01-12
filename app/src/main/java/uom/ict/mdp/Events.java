@@ -147,6 +147,19 @@ public class Events implements Comparable<Events> {
 
     public void setyCoordinates(float yCoordinates) {this.yCoordinates = yCoordinates;}
 
+	public long getTimeMillis() {
+		int colon = time.indexOf(':');
+		int hours = Integer.parseInt( time.substring(0, colon) );
+		int mins = Integer.parseInt( time.substring(colon) );
+		return ((hours * 60) + mins) * 60 * 1000;
+	}
+
+	public Date getTimeDate() {
+		Date date = new Date();
+		date.setTime(getTimeMillis());
+		return date;
+	}
+
     @Override
     public int compareTo(Events other) {
         return this.name.compareTo(other.getName());

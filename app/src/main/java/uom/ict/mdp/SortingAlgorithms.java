@@ -21,13 +21,12 @@ public class SortingAlgorithms extends ArrayList<Events> {
      *
      * @return The index where the events that are due in the next 15 minutes end.
      */
-    /**
     public int getUpcomingEvents() {
         int i = 0;
         Date fifteenMinutesFromNow = new Date();
         fifteenMinutesFromNow.setTime((new Date()).getTime() + (15 * 60 * 1000));
         for (Events e: this) {
-            if (e.getDate().after(fifteenMinutesFromNow)) {
+            if (e.getTimeDate().after(fifteenMinutesFromNow)) {
                 break;
             }
             i++;
@@ -38,7 +37,6 @@ public class SortingAlgorithms extends ArrayList<Events> {
     /**
      * Sorts the list by event times
      */
-    /**
     public void sortByTime() {
         Collections.sort(this, new EventTimeComparator());
     }
@@ -63,12 +61,11 @@ public class SortingAlgorithms extends ArrayList<Events> {
     /**
      * Comparator for Events according to their event time.
      */
-    /**
     private static class EventTimeComparator implements Comparator<Events> {
         @Override
         public int compare(Events events, Events events2) {
             // Transfer comparing task to the compareTo method of the Date class
-            return events.getDate().compareTo(events2.getDate());
+            return events.getTimeDate().compareTo(events2.getTimeDate());
         }
     }
 
