@@ -13,6 +13,9 @@ import java.util.Date;
  */
 public class SortingAlgorithms extends ArrayList<Events> {
 
+	private static final int MINS_TO_SEC = 60;
+	private static final int MINS_TO_MILLIS = MINS_TO_SEC * 1000;
+
     /**
      * Calculates and returns the last position of the last event that is due in the next 15
      * minutes. This can be used to identify where a separator is to be shown in the event list.
@@ -22,7 +25,7 @@ public class SortingAlgorithms extends ArrayList<Events> {
     public int getUpcomingEvents() {
         int i = 0;
         Date fifteenMinutesFromNow = new Date();
-        fifteenMinutesFromNow.setTime((new Date()).getTime() + (15 * 60 * 1000));
+        fifteenMinutesFromNow.setTime((new Date()).getTime() + (15 * MINS_TO_MILLIS));
         for (Events e: this) {
             if (e.getTimeDate().after(fifteenMinutesFromNow)) {
                 break;
@@ -54,7 +57,6 @@ public class SortingAlgorithms extends ArrayList<Events> {
     public void sortByAgeType() {
         Collections.sort(this, new EventAgeTypeComparator());
     }
-
 
     /**
      * Comparator for Events according to their event time.
