@@ -1,10 +1,7 @@
 package uom.ict.mdp;
 
-
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
@@ -17,24 +14,21 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
-
 public class MainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+
+	public static final boolean DEBUG = true;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
-//    private MapView mMapView;
     private GoogleMap mGoogleMap;
     private Intent i;
-    private List<Events> eventsList = new ArrayList<Events>();
-
-
+    private EventList eventsList = new EventList();
+	private EventsListAdapter eventListAdapter;
+	private ListView eventView;
+	private int currentMainEvent = 0;
 
     /**
      *  Static Data for Testing Purposes, Will shows the Events Possible in Notte Biancha as Rows
@@ -79,19 +73,19 @@ public class MainActivity extends Activity
             "Featuring the harpist Lydia Buttigieg, maestro Dr. Joseph Gatt, tenor Brian Cefai and soprano Kimberly Marie Grech accompanied by pianist Louise Zammit.";
 
     // --- Static Array For Notte Biancha which will have the events
-    public static Events[] notteBiancha = new Events[]
-            {
-               new Events(1,R.drawable.opening,"Notte Bianca 2015 Opening",opDesc,"Independence Square","19:00","All Night",EventAgeType.GENERAL,35.896782f, 14.510254f),
-               new Events(2,R.drawable.ziguzajg,"Ziguzajg Area for Children and Young People",zigDesc,"St James Cavalier Centre for Creativity, Pope Pius V Street, Valletta","19:00","All Night",EventAgeType.CHILD,35.895757f, 14.510243f),
-               new Events(3,R.drawable.ilqaddisin,"Il-Qaddisin",qaddDesc,"Old Theatre Street, Valletta","19:00","All Night",EventAgeType.GENERAL,35.899786f, 14.512596f),
-               new Events(4,R.drawable.orgni,"Fuq L-Orgni ta' Patri Bert",orgDesc,"St. Augustine Church, Old Bakery Street,","20:30","22:30",EventAgeType.GENERAL,35.898759f, 14.510890f),
-               new Events(5,R.drawable.bellophone,"Bellophone",bellDesc,"Misrah l-Indipendenza","19:00","20:30",EventAgeType.GENERAL,35.896782f, 14.510254f),
-               new Events(6,R.drawable.pintateatru,"Pintateatru : Qatt Ma Ninsa Qatt",pintDesc,"Palace Courtyard, Republic Street,Palace Courtyard, Republic Street,","19:30","All Night",EventAgeType.ADULT,35.900069f, 14.515345f),
-               new Events(7,R.drawable.orkestraswing,"OrkestraSwing",orkDesc,"Pjazza Teatru Rjal","00:00","02:00",EventAgeType.GENERAL,35.896730f, 14.510296f),
-               new Events(8,R.drawable.plancier,"Id-Dinja fuq il-Plancier",planDesc,"St.Lucia Street","20:30","01:30",EventAgeType.GENERAL,35.898279f, 14.512579f),
-               new Events(9,R.drawable.kastiljaklassika,"Kastilja Klassika",kastDesc,"Pjazza Kastilja","19:00","21:00",EventAgeType.GENERAL,35.895670f, 14.511091f)
+    public static Event[] notteBiancha = new Event[]
+		{
+		   new Event(1,R.drawable.opening,"Notte Bianca 2015 Opening",opDesc,"Independence Square","19:00","All Night",EventAgeType.GENERAL,35.896782f, 14.510254f),
+		   new Event(2,R.drawable.ziguzajg,"Ziguzajg Area for Children and Young People",zigDesc,"St James Cavalier Centre for Creativity, Pope Pius V Street, Valletta","19:00","All Night",EventAgeType.CHILD,35.895757f, 14.510243f),
+		   new Event(3,R.drawable.ilqaddisin,"Il-Qaddisin",qaddDesc,"Old Theatre Street, Valletta","19:00","All Night",EventAgeType.GENERAL,35.899786f, 14.512596f),
+		   new Event(4,R.drawable.orgni,"Fuq L-Orgni ta' Patri Bert",orgDesc,"St. Augustine Church, Old Bakery Street,","20:30","22:30",EventAgeType.GENERAL,35.898759f, 14.510890f),
+		   new Event(5,R.drawable.bellophone,"Bellophone",bellDesc,"Misrah l-Indipendenza","19:00","20:30",EventAgeType.GENERAL,35.896782f, 14.510254f),
+		   new Event(6,R.drawable.pintateatru,"Pintateatru : Qatt Ma Ninsa Qatt",pintDesc,"Palace Courtyard, Republic Street,Palace Courtyard, Republic Street,","19:30","All Night",EventAgeType.ADULT,35.900069f, 14.515345f),
+		   new Event(7,R.drawable.orkestraswing,"OrkestraSwing",orkDesc,"Pjazza Teatru Rjal","00:00","02:00",EventAgeType.GENERAL,35.896730f, 14.510296f),
+		   new Event(8,R.drawable.plancier,"Id-Dinja fuq il-Plancier",planDesc,"St.Lucia Street","20:30","01:30",EventAgeType.GENERAL,35.898279f, 14.512579f),
+		   new Event(9,R.drawable.kastiljaklassika,"Kastilja Klassika",kastDesc,"Pjazza Kastilja","19:00","21:00",EventAgeType.GENERAL,35.895670f, 14.511091f)
 
-            };
+		};
 
 
     /**
@@ -113,156 +107,126 @@ public class MainActivity extends Activity
     public final static String liveconcertDesc = "A Live concert starring 3 bands to keep you entertained during the night"
             + "\n" + "Starting at 19:00 - 20:00 a Band from the US, Matuto, will open the concert"
             + "\n" + "Following at 20:15 - 21:45 will be a local Band, D-Banned"
-            + "\n" + "And ending the show we will have the famous Cash&Band who will start from 22:00 - 00:00"
-            ;
+            + "\n" + "And ending the show we will have the famous Cash&Band who will start from 22:00 - 00:00";
 
-    public static Events[] birgu = new Events[] {
-	   new Events (1,R.drawable.maltaknights,"Knights Enactment",knightDesc,"Misrah Ir-Rebha","09:00","12:00",EventAgeType.CHILD,35.887969f, 14.521910f),
-	   new Events (2,R.drawable.funtrain,"Fun Train  Tours",funtrainDesc,"Vittoriosa Bus Terminus","09:00","12:00",EventAgeType.GENERAL,35.884906f, 14.523435f),
-	   new Events (3,R.drawable.tours,"Guided Tours  for Children to historical places in the City of Birgu",tourDesc,"Triq Pawlu Boffa", "09:00","22:00",EventAgeType.CHILD, 35.885820f, 14.522933f),
-	   new Events (4,R.drawable.artisan,"Couvre Porte Area",couvreDesc,"Couvre Porte, Triq 8 ta' Dicembru", "19:00","23:00",EventAgeType.CHILD, 35.885362f, 14.522634f),
-	   new Events (5,R.drawable.liveconcert,"Knights Enactment",liveconcertDesc,"Triq Pawlu Boffa", "19:00","00:00",EventAgeType.CHILD, 35.885820f, 14.522933f),
-	   new Events (6,R.drawable.funtrain,"Fun Train  Tours",funtrainDesc,"Vittoriosa Bus Terminus","19:00","00:00",EventAgeType.GENERAL,35.884906f, 14.523435f),
-
+    public static Event[] birgu = new Event[] {
+	   new Event(1,R.drawable.maltaknights,"Knights Enactment",knightDesc,"Misrah Ir-Rebha","09:00","12:00",EventAgeType.CHILD,35.887969f, 14.521910f),
+	   new Event(2,R.drawable.funtrain,"Fun Train  Tours",funtrainDesc,"Vittoriosa Bus Terminus","09:00","12:00",EventAgeType.GENERAL,35.884906f, 14.523435f),
+	   new Event(3,R.drawable.tours,"Guided Tours  for Children to historical places in the City of Birgu",tourDesc,"Triq Pawlu Boffa", "09:00","22:00",EventAgeType.CHILD, 35.885820f, 14.522933f),
+	   new Event(4,R.drawable.artisan,"Couvre Porte Area",couvreDesc,"Couvre Porte, Triq 8 ta' Dicembru", "19:00","23:00",EventAgeType.CHILD, 35.885362f, 14.522634f),
+	   new Event(5,R.drawable.liveconcert,"Knights Enactment",liveconcertDesc,"Triq Pawlu Boffa", "19:00","00:00",EventAgeType.CHILD, 35.885820f, 14.522933f),
+	   new Event(6,R.drawable.funtrain,"Fun Train  Tours",funtrainDesc,"Vittoriosa Bus Terminus","19:00","00:00",EventAgeType.GENERAL,35.884906f, 14.523435f),
 	};
 
 
 
-
-
-
-
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
-    private CharSequence mTitle;
-
-
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {   super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        // ---- Displaying the List according to the Page the User chose in the INTRO page ---- //
-
         Intent i2 = getIntent();
-        final int event = i2.getExtras().getInt(Intro.EVENT_TITLE);
-        Toast.makeText(getBaseContext(),""+event,Toast.LENGTH_SHORT).show();
+		currentMainEvent = i2.getExtras().getInt(Intro.EVENT_TITLE);
+		final int event = currentMainEvent;
+		debugToast(""+currentMainEvent);
 
+		// According to the event, the List will change.
+		EventList[] mainEvents = {
+			new EventList(notteBiancha),
+			new EventList(birgu)
+		};
+		eventsList = mainEvents[currentMainEvent];
+		eventsList.sortByTime();
 
-        // According to the event, the List will change.
-
-        switch (event)
-        {
-            case 0:
-                // Notte Biancha
-                for (int i=0; i<notteBiancha.length; i++)
-                {
-                    eventsList.add(notteBiancha[i]);
-                }
-                break;
-            case 1:
-                for (int i=0; i<birgu.length; i++)
-                {
-                    eventsList.add(birgu[i]);
-                }
-                break;
-
-
-
-        }
-
-
-
-        // Changing array to List
-
-
-
-        ListView eventView = (ListView) findViewById(R.id.event_lists);
-        eventView.setAdapter(new EventsListAdapter(this, R.layout.events_list_item,eventsList));
-
-
+		// Initialize the event view and set the adapter to it
+        this.eventView = (ListView) findViewById(R.id.event_lists);
+		updateEventList();
 
         // Onclick Listener
-
-        eventView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        this.eventView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String test = ("This is a test " + position);
-                Toast.makeText(getBaseContext(),test,Toast.LENGTH_SHORT).show();
-
-
-                onClickEvent(position);
-
-
+				debugToast("This is a test " + position);
+                onEventClick(position);
             }
         });
 
+		// Get the fragment for the navigation drawer
+        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
-
-        // Set up the drawer.
+		// Set up the drawer with the DrawerLayout
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-
     }
 
-    public void onClickEvent(int position)
-    {
+
+	/**
+	 * ON CLICK ON AN EVENT
+	 *
+	 * @param position Position of the event clicked.
+	 */
+    public void onEventClick(int position) {
         Intent i = new Intent (this, EventInfoActivity.class);
-
-        i.putExtra(TITLE, eventsList.get(position).getName());
-        i.putExtra(LOCATION,eventsList.get(position).getLocation());
-        i.putExtra(DESCRIPTION,eventsList.get(position).getDescription());
-        i.putExtra(START_TIME,eventsList.get(position).getTime());
-        i.putExtra(END_TIME, eventsList.get(position).getEndTime());
-        i.putExtra(CATEGORY,eventsList.get(position).getAgeType().toString());
-        i.putExtra(XCOOR,eventsList.get(position).getxCoordinates());
-        i.putExtra(YCOOR,eventsList.get(position).getyCoordinates());
+		Event e = eventsList.get(position);
+		i.putExtra(TITLE,  e.getName());
+		i.putExtra(LOCATION, e.getLocation());
+		i.putExtra(DESCRIPTION, e.getDescription());
+		i.putExtra(START_TIME, e.getTime());
+		i.putExtra(END_TIME,  e.getEndTime());
+		i.putExtra(CATEGORY, e.getAgeType().toString());
+		i.putExtra(XCOOR, e.getxCoordinates());
+		i.putExtra(YCOOR, e.getyCoordinates());
         startActivity(i);
-
-
-
     }
 
+
+	private void updateEventList() {
+		this.eventListAdapter = new EventsListAdapter(this, R.layout.events_list_item, this.eventsList);
+		this.eventView.setAdapter(this.eventListAdapter);
+	}
 
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
+		switch (position) {
+			case 0:
+				this.eventsList.sortByTime();
+				debugToast("Sorted by time");
+				break;
+			case 1:
+				this.eventsList.sortByName();
+				debugToast("Sorted by name");
+				break;
+			case 2:
+				this.eventsList.sortByAgeType();
+				debugToast("Sorted by age type");
+				break;
+			case 3:
+				this.eventsList.sortByLocation();
+				debugToast("Sorted by location");
+				break;
+		}
+		if (this.eventListAdapter != null) {
+			updateEventList();
+		}
     }
 
     public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                //mTitle = getString(R.string.sort_age);
-                Toast.makeText(getApplicationContext(), "This will sort by Age.", Toast.LENGTH_SHORT).show();
+		switch (number) {
+			case 1:
+				//mTitle = getString(R.string.sort_age);
+				Toast.makeText(getApplicationContext(), "This will sort by Age.", Toast.LENGTH_SHORT).show();
 
-                break;
-            case 2:
-                //mTitle = getString(R.string.sort_name);
-                break;
-            case 3:
-                //mTitle = getString(R.string.sort_time);
-                break;
-        }
-    }
-
-    public void restoreActionBar() {
-        ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
-    }
+				break;
+			case 2:
+				//mTitle = getString(R.string.sort_name);
+				break;
+			case 3:
+				//mTitle = getString(R.string.sort_time);
+				break;
+		}
+	}
 
 
     @Override
@@ -289,6 +253,7 @@ public class MainActivity extends Activity
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
+
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -307,26 +272,17 @@ public class MainActivity extends Activity
             return fragment;
         }
 
-        public PlaceholderFragment() {
-        }
-
-
-/*
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.event_info_layout, container, false);
-            return rootView;
-        }*/
-
 
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
-//            /*((MainActivity) activity).onSectionAttached(
-//                    getArguments().getInt(ARG_SECTION_NUMBER));*/
         }
     }
 
+
+
+	public void debugToast(String message) {
+		if (DEBUG) Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+	}
 
 }

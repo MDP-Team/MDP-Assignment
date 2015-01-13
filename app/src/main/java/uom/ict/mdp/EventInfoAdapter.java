@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 /**
@@ -19,13 +17,13 @@ import java.util.List;
 /**
  * Adapter Class to show the necessary information on screen.
  */
-public class EventInfoAdapter extends ArrayAdapter<Events>{
+public class EventInfoAdapter extends ArrayAdapter<Event>{
 
     public Context context;
     public int resource;
-    public List<Events> objects;
+    public List<Event> objects;
 
-    public EventInfoAdapter(Context context, int resource, int textViewResourceId, List<Events> objects) {
+    public EventInfoAdapter(Context context, int resource, int textViewResourceId, List<Event> objects) {
         super(context, resource, textViewResourceId, objects);
 
         this.context = context;

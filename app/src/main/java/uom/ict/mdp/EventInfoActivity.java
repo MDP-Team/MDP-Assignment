@@ -35,24 +35,20 @@ import java.util.List;
 /**
  * Where all the EventInfo data will be held. Will be used as intents
  */
-public class EventInfoActivity extends FragmentActivity
-{
+public class EventInfoActivity extends FragmentActivity {
     private MapFragment mapFragment;
     private GoogleMap googleMap;
     public static FragmentManager fragmentManager;
-    private Button button;
 
     private ScrollView mainScrollView;
 
     @Override
-    protected void onCreate(Bundle savedInstance)
-    {
+    protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
 		setTitle("Event Details");
         setContentView(R.layout.event_info_layout);
 
         // This will make the Maps UI usable as without it the ScrollView would hinder every possibility
-
 
         googleMap = ((MapUIControls) getFragmentManager().findFragmentById(R.id.location_map)).getMap();
         mainScrollView = (ScrollView) findViewById(R.id.main_scroll);
@@ -63,7 +59,6 @@ public class EventInfoActivity extends FragmentActivity
             }
         });
 
-
         // ----- Intents and data change according to the row number ---- //
 
         Intent i = getIntent();
@@ -73,10 +68,6 @@ public class EventInfoActivity extends FragmentActivity
 
         LatLng eventLatLng = new LatLng(xcoor,ycoor);
 
-
-
-
-
         // ---- Outputting the Information ---- //
 
         // -- Title -- //
@@ -84,13 +75,10 @@ public class EventInfoActivity extends FragmentActivity
         TextView nameText = (TextView) findViewById(R.id.event_name_info);
         nameText.setText(title);
 
-
         // -- DESC -- //
         String description = i.getStringExtra(MainActivity.DESCRIPTION);
         TextView descText = (TextView) findViewById(R.id.description_info);
         descText.setText(description);
-
-
 
         // -- LOCATION -- //
         String location = i.getStringExtra(MainActivity.LOCATION);
@@ -112,33 +100,14 @@ public class EventInfoActivity extends FragmentActivity
         TextView categoryText= (TextView) findViewById(R.id.category_info);
         categoryText.setText("Age Group:" + category);
 
+		// -- GOOGLE MAP -- //
 
-
-
-
-
-        button = (Button) findViewById(R.id.google_maps_info);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-
-            Marker eventMarker = googleMap.addMarker(new MarkerOptions().position(eventLatLng)
-                                            .title(title));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(eventLatLng, 15));
-            googleMap.animateCamera(CameraUpdateFactory.zoomTo(17), 2000, null);
-            googleMap.getUiSettings().setMapToolbarEnabled(true);
-            googleMap.getUiSettings().setZoomControlsEnabled(true);
-
-
-
-
-
-
+		Marker eventMarker = googleMap.addMarker(new MarkerOptions().position(eventLatLng)
+										.title(title));
+		googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(eventLatLng, 15));
+		googleMap.animateCamera(CameraUpdateFactory.zoomTo(17), 2000, null);
+		googleMap.getUiSettings().setMapToolbarEnabled(true);
+		googleMap.getUiSettings().setZoomControlsEnabled(true);
     }
-
-
 
 }

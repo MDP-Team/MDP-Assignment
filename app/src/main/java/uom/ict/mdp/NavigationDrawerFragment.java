@@ -40,6 +40,16 @@ public class NavigationDrawerFragment extends Fragment {
      */
     private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
 
+	/**
+	 * Drawer items
+	 */
+	private static final String[] drawerItems = {
+		"Sort upcoming events first",
+		"Sort by name",
+		"Sort by age group",
+		"Sort by location"
+	};
+
     /**
      * A pointer to the current callbacks instance (the Activity).
      */
@@ -101,12 +111,7 @@ public class NavigationDrawerFragment extends Fragment {
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
-                new String[]{
-                        "Sort upcoming events first",
-						"Sort by name",
-						"Sort by age group",
-						"Sort by location"
-                }));
+                drawerItems));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }

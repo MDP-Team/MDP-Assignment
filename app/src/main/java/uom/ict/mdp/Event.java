@@ -5,12 +5,13 @@ import java.util.Date;
 /**
  * Event class. Represents a real life future event.
  */
-public class Events implements Comparable<Events> {
+public class Event implements Comparable<Event> {
 
     private int id;
     private int icon;
     private String name;
     private String description;
+	private String category;
     private String time;
     private String endTime;
     private EventAgeType ageType;
@@ -22,20 +23,13 @@ public class Events implements Comparable<Events> {
     /**
      * Full Constructor WITHOUT Description.
      * Used to show Events necessary
-     *
-     * @param icon Icon of event
-     * @param name The event name
-     * @param time The start time of the event
-     * @param endTime The time when event finishes
-     * @param ageType The EventAgeType enum for the event's age type
-     * @param location The location of the event (Street Name)
-     *
      */
-    public Events(int id, int icon, String name, String location, String time, String endTime, EventAgeType ageType, float xCoor, float yCoor ) {
+    public Event(int id, int icon, String name, String location, String category, String time, String endTime, EventAgeType ageType, float xCoor, float yCoor) {
         this.id = id;
         this.icon = icon;
         this.name = name;
         this.location = location;
+		this.category = category;
         this.time = time;
         this.endTime= endTime;
         this.ageType = ageType;
@@ -52,15 +46,17 @@ public class Events implements Comparable<Events> {
      * @param endTime The time when event finishes
      * @param ageType The EventAgeType enum for the event's age type
      * @param location The location of the event
+	 * @param category The category
      * @param xCoor The x-coordinates on the map
      * @param yCoor The y-coordinates on the map
      *
      */
-    public Events(int id, int icon, String name, String description,String location, String time, String endTime, EventAgeType ageType, float xCoor, float yCoor ) {
+    public Event(int id, int icon, String name, String description, String location, String category, String time, String endTime, EventAgeType ageType, float xCoor, float yCoor) {
         this.id = id;
         this.icon = icon;
         this.name = name;
         this.description = description;
+		this.category = category;
         this.time = time;
         this.endTime = endTime;
         this.ageType = ageType;
@@ -74,11 +70,12 @@ public class Events implements Comparable<Events> {
      *
      * @param other The other event to copy.
      */
-    public Events(Events other) {
+    public Event(Event other) {
         this.id = new Integer(other.id);
         this.icon = new Integer(other.icon);
         this.name = new String(other.name);
         this.time = new String (other.time);
+		this.category = new String(other.category);
         this.endTime = new String (other.endTime);
         this.ageType = other.ageType;
         this.location = new String(other.location);
@@ -150,7 +147,8 @@ public class Events implements Comparable<Events> {
 	public long getTimeMillis() {
 		int colon = time.indexOf(':');
 		int hours = Integer.parseInt( time.substring(0, colon) );
-		int mins = Integer.parseInt( time.substring(colon) );
+		if (hours == 0) hours = 24;
+		int mins = Integer.parseInt( time.substring(colon+1) );
 		return ((hours * 60) + mins) * 60 * 1000;
 	}
 
@@ -161,7 +159,7 @@ public class Events implements Comparable<Events> {
 	}
 
     @Override
-    public int compareTo(Events other) {
+    public int compareTo(Event other) {
         return this.name.compareTo(other.getName());
     }
 

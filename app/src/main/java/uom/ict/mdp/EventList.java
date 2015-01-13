@@ -1,6 +1,7 @@
 package uom.ict.mdp;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -11,10 +12,19 @@ import java.util.Date;
  *
  * List of events. Inherits from SortingAlgorithms
  */
-public class SortingAlgorithms extends ArrayList<Events> {
+public class EventList extends ArrayList<Event> {
 
 	private static final int MINS_TO_SEC = 60;
 	private static final int MINS_TO_MILLIS = MINS_TO_SEC * 1000;
+
+	public EventList() {
+		super(0);
+	}
+
+	public EventList(Event[] events) {
+		this();
+		this.addAll(Arrays.asList(events));
+	}
 
     /**
      * Calculates and returns the last position of the last event that is due in the next 15
@@ -26,7 +36,7 @@ public class SortingAlgorithms extends ArrayList<Events> {
         int i = 0;
         Date fifteenMinutesFromNow = new Date();
         fifteenMinutesFromNow.setTime((new Date()).getTime() + (15 * MINS_TO_MILLIS));
-        for (Events e: this) {
+        for (Event e: this) {
             if (e.getTimeDate().after(fifteenMinutesFromNow)) {
                 break;
             }
@@ -51,6 +61,11 @@ public class SortingAlgorithms extends ArrayList<Events> {
         Collections.sort(this);
     }
 
+	/**
+	 * Sorts the list by location
+	 */
+	public void sortByLocation() { Collections.sort(this, new EventLocationComparator()); }
+
     /**
      * Sorts the list showing adult events first, child events second.
      */
@@ -61,28 +76,38 @@ public class SortingAlgorithms extends ArrayList<Events> {
     /**
      * Comparator for Events according to their event time.
      */
-    private static class EventTimeComparator implements Comparator<Events> {
+    private static class EventTimeComparator implements Comparator<Event> {
         @Override
-        public int compare(Events events, Events events2) {
+        public int compare(Event event, Event event2) {
             // Transfer comparing task to the compareTo method of the Date class
-            return events.getTimeDate().compareTo(events2.getTimeDate());
+            return (int)(event.getTimeMillis() - event2.getTimeMillis());
         }
     }
 
     /**
-     * Comparator for Events according to their targetted age type.
+     * Comparator for Events according to their targeted age type.
      */
-    private static class EventAgeTypeComparator implements Comparator<Events> {
+    private static class EventAgeTypeComparator implements Comparator<Event> {
         @Override
-        public int compare(Events events, Events events2) {
+        public int compare(Event event, Event event2) {
             // Get the enum ordinals
-            int ordinal1 = events.getAgeType().ordinal();
-            int ordinal2 = events2.getAgeType().ordinal();
+            int ordinal1 = event.getAgeType().ordinal();
+            int ordinal2 = event2.getAgeType().ordinal();
             // Return 1 if first is greater than second, -1 if smaller, 0 if equal.
             if (ordinal1 > ordinal2) return 1;
             else if (ordinal1 < ordinal2) return -1;
             else return 0;
         }
     }
+
+	/**
+	 * Comparator for Events, according to their location string.
+	 */
+	public static class EventLocationComparator implements Comparator<Event> {
+		@Override
+		public int compare(Event event, Event event2) {
+			return event.getLocation().compareTo(event2.getLocation());
+		}
+	}
 
 }

@@ -10,25 +10,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
-
-import static android.graphics.Color.parseColor;
 
 /**
  * Created by DodoSerebro on 10/12/2014.
  */
-public class EventsListAdapter extends ArrayAdapter<Events>
-{
+public class EventsListAdapter extends ArrayAdapter<Event> {
+
     public Context context;
     public int resource;
-    public List<Events> objects;
+    public List<Event> objects;
 
 
-    public EventsListAdapter(Context context, int resource, List<Events> objects)
-    {
+    public EventsListAdapter(Context context, int resource, List<Event> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
@@ -36,10 +30,8 @@ public class EventsListAdapter extends ArrayAdapter<Events>
     }
 
     @Override
-    public View getView (int position, View convertView, ViewGroup parent)
-    {
-        if(convertView==null)
-        {
+    public View getView (int position, View convertView, ViewGroup parent) {
+        if(convertView == null) {
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             convertView = inflater.inflate(resource, parent, false);
         }
@@ -63,16 +55,13 @@ public class EventsListAdapter extends ArrayAdapter<Events>
         TextView category = (TextView) convertView.findViewById(R.id.category);
         category.setText("Age Group: " + objects.get(position).getAgeType().toString());
 
-        if(objects.get(position).getAgeType().toString() == "Children")
-        {
+        if (objects.get(position).getAgeType().toString().equals("Children")) {
            convertView.setBackgroundColor(Color.parseColor("#C2E0FF"));
         }
-        else if (objects.get(position).getAgeType().toString() == "General Audience")
-        {
+        else if (objects.get(position).getAgeType().toString().equals("General Audience")) {
             convertView.setBackgroundColor(Color.parseColor("#B8E6B8"));
         }
-        else
-        {
+        else {
             convertView.setBackgroundColor(Color.parseColor("#FFC1C1"));
         }
 

@@ -109,13 +109,6 @@
         android:layout_height="match_parent"
         android:src="@android:color/transparent"/>
 
-    <Button
-        android:id="@+id/google_maps_info"
-        android:layout_width="fill_parent"
-        android:text="Show all Markers"
-        android:layout_height="50dp"
-        />
-
 
 
 
