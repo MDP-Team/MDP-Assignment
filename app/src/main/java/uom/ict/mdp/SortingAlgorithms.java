@@ -17,8 +17,6 @@ public class SortingAlgorithms extends ArrayList<Events> {
      * Calculates and returns the last position of the last event that is due in the next 15
      * minutes. This can be used to identify where a separator is to be shown in the event list.
      *
-     * @todo Need to test, and confirm how future date creation is done.
-     *
      * @return The index where the events that are due in the next 15 minutes end.
      */
     public int getUpcomingEvents() {
