@@ -31,7 +31,8 @@ public class MainActivity extends Activity
 
 	public static final boolean DEBUG = false;
 	public static final String[] MAIN_EVENT_IDS = {
-		"81E19FAB-92F8-4122-B501-5C16F670E814"		// Notte Biancha
+		"81E19FAB-92F8-4122-B501-5C16F670E814",		// Notte Biancha
+		"FE55A1F8-C29A-4827-8A60-5683E5E2F23E"		// Birgu Fest
 	};
 
 	public final static String TITLE = "title";
@@ -184,38 +185,14 @@ public class MainActivity extends Activity
 				this.eventsList.sortByLocation();
 				debugToast("Sorted by location");
 				break;
+			case 4:
+				this.eventsList.sortByCategory();
+				debugToast("Sorted by category");
+				break;
 		}
 		if (this.eventListAdapter != null) {
 			updateEventList();
 		}
-	}
-
-
-	/**
-	 * Add a new item
-	 */
-	public void addItem() {
-
-		// Create a new item
-		final Event event = new Event();
-		event.setMainEventId("81E19FAB-92F8-4122-B501-5C16F670E814");
-
-		event.setName("Destroying Azure");
-		event.setDescription("The time has come for Azure to get dragged into the Recycling bin.");
-
-		// Insert the new item
-		new AsyncTask<Void, Void, Void>() {
-	        @Override
-	        protected Void doInBackground(Void... params) {
-	            try {
-					Log.v("MEPA", "Attempting to insert a test item");
-	                mEventsTable.insert(event).get();
-	            } catch (Exception exception) {
-					Log.v("MEPA", "Error: " + exception.getMessage());
-	            }
-	            return null;
-	        }
-	    }.execute();
 	}
 
 

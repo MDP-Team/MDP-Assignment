@@ -95,8 +95,8 @@ public class Event implements Comparable<Event> {
         this.ageType = other.ageType;
         this.location = new String(other.location);
         this.description = new String(other.description);
-        this.xCoordinates = new Float(other.xCoordinates);
-        this.yCoordinates = new Float(other.yCoordinates);
+        this.xCoordinates = new Float(other.xCoordinates).floatValue();
+        this.yCoordinates = new Float(other.yCoordinates).floatValue();
     }
 
 	public String getMainEventId() {

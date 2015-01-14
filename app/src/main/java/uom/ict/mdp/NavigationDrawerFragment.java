@@ -47,7 +47,8 @@ public class NavigationDrawerFragment extends Fragment {
 		"Sort upcoming events first",
 		"Sort by name",
 		"Sort by age group",
-		"Sort by location"
+		"Sort by location",
+		"Sort by Category"
 	};
 
     /**

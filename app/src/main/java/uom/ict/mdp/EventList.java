@@ -66,6 +66,11 @@ public class EventList extends ArrayList<Event> {
 	 */
 	public void sortByLocation() { Collections.sort(this, new EventLocationComparator()); }
 
+	/**
+	 * Sorts the list by category
+	 */
+	public void sortByCategory() { Collections.sort(this, new EventCategoryComparator()); }
+
     /**
      * Sorts the list showing adult events first, child events second.
      */
@@ -107,6 +112,16 @@ public class EventList extends ArrayList<Event> {
 		@Override
 		public int compare(Event event, Event event2) {
 			return event.getLocation().compareTo(event2.getLocation());
+		}
+	}
+
+	/**
+	 * Comparator for Events, according to their category string.
+	 */
+	public static class EventCategoryComparator implements Comparator<Event> {
+		@Override
+		public int compare(Event event, Event event2) {
+			return event.getCategory().compareTo(event2.getCategory());
 		}
 	}
 
