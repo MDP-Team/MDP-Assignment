@@ -20,9 +20,14 @@ import com.microsoft.windowsazure.mobileservices.MobileServiceClient;
 import com.microsoft.windowsazure.mobileservices.MobileServiceList;
 import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 import java.net.MalformedURLException;
+import java.text.SimpleDateFormat;
+
+import com.microsoft.windowsazure.notifications.NotificationsManager;
 
 public class MainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+
+	public static final String SENDER_ID = "222016993711";
 
 	public static final boolean DEBUG = false;
 	public static final String[] MAIN_EVENT_IDS = {
@@ -39,7 +44,8 @@ public class MainActivity extends Activity
 	public final static String XCOOR = "xcoor";
 	public final static String YCOOR = "ycoor";
 
-	private MobileServiceClient mClient;
+	public static  MobileServiceClient mClient;
+
 	private MobileServiceTable<Event> mEventsTable;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private GoogleMap mGoogleMap;
@@ -67,6 +73,7 @@ public class MainActivity extends Activity
 				"BKMUxLaaeDGwnYFRmZEKEzuMhhMNdT83",
 				this
 			);
+			NotificationsManager.handleNotifications(this, SENDER_ID, NotificationHandler.class);
 
 			// Get the Mobile Service Table instance to use
 			mEventsTable = mClient.getTable(Event.class);
@@ -138,11 +145,12 @@ public class MainActivity extends Activity
     public void onEventClick(int position) {
         Intent i = new Intent (this, EventInfoActivity.class);
 		Event e = eventsList.get(position);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("K:mm");
 		i.putExtra(TITLE,  e.getName());
 		i.putExtra(LOCATION, e.getLocation());
 		i.putExtra(DESCRIPTION, e.getDescription());
-		i.putExtra(START_TIME, e.getTime());
-		i.putExtra(END_TIME,  e.getEndTime());
+		i.putExtra(START_TIME, dateFormat.format(e.getTime()));
+		i.putExtra(END_TIME,  dateFormat.format(e.getEndTime()));
 		i.putExtra(AGE_GROUP, e.getAgeType().toString());
 		i.putExtra(CATEGORY, e.getCategory());
 		i.putExtra(XCOOR, e.getxCoordinates());

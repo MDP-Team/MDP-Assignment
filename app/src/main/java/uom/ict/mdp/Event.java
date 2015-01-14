@@ -12,8 +12,8 @@ public class Event implements Comparable<Event> {
     private String name;
     private String description;
 	private String category;
-    private String time;
-    private String endTime;
+    private Date time;
+    private Date endTime;
     private EventAgeType ageType;
     private String location;
     private float xCoordinates;
@@ -25,14 +25,14 @@ public class Event implements Comparable<Event> {
 	 * Default Contructor
 	 */
 	public Event() {
-		this(null, R.drawable.ziguzajg, "", "", "", "", "15:30", "17:00", EventAgeType.ADULT, 0, 0);
+		this(null, R.drawable.ziguzajg, "", "", "", "", new Date(), new Date(), EventAgeType.ADULT, 0, 0);
 	}
 
     /**
      * Full Constructor WITHOUT Description.
      * Used to show Events necessary
      */
-    public Event(String id, int icon, String name, String location, String time, String endTime, EventAgeType ageType, float xCoor, float yCoor) {
+    public Event(String id, int icon, String name, String location, Date time, Date endTime, EventAgeType ageType, float xCoor, float yCoor) {
 		this(id , icon, name, "", location, time, endTime, ageType, xCoor, yCoor);
     }
 
@@ -49,7 +49,7 @@ public class Event implements Comparable<Event> {
      * @param yCoor The y-coordinates on the map
      *
      */
-    public Event(String id, int icon, String name, String description, String location, String time, String endTime, EventAgeType ageType, float xCoor, float yCoor) {
+    public Event(String id, int icon, String name, String description, String location, Date time, Date endTime, EventAgeType ageType, float xCoor, float yCoor) {
         this(id , icon, name, description, "", location, time, endTime, ageType, xCoor, yCoor);
     }
 
@@ -66,7 +66,7 @@ public class Event implements Comparable<Event> {
 	 * @param yCoor The y-coordinates on the map
 	 *
 	 */
-	public Event(String id, int icon, String name, String description, String category, String location, String time, String endTime, EventAgeType ageType, float xCoor, float yCoor) {
+	public Event(String id, int icon, String name, String description, String category, String location, Date time, Date endTime, EventAgeType ageType, float xCoor, float yCoor) {
 		this.id = id;
 		this.icon = icon;
 		this.name = name;
@@ -89,9 +89,9 @@ public class Event implements Comparable<Event> {
         this.id = new String(other.id);
         this.icon = new Integer(other.icon);
         this.name = new String(other.name);
-        this.time = new String (other.time);
+        this.time = (Date) other.time.clone();
 		this.category = new String(other.category);
-        this.endTime = new String (other.endTime);
+        this.endTime = (Date) other.endTime.clone();
         this.ageType = other.ageType;
         this.location = new String(other.location);
         this.description = new String(other.description);
@@ -135,13 +135,13 @@ public class Event implements Comparable<Event> {
         this.description = desc;
     }
 
-    public String getTime() { return time; }
+    public Date getTime() { return time; }
 
-    public void setTime(String time) {this.time = time;}
+    public void setTime(Date time) {this.time = time;}
 
-    public String getEndTime() {return endTime;}
+    public Date getEndTime() {return endTime;}
 
-    public void setEndTime(String endTime) {this.endTime = endTime;}
+    public void setEndTime(Date endTime) {this.endTime = endTime;}
 
     public EventAgeType getAgeType() {
         return ageType;
@@ -170,20 +170,6 @@ public class Event implements Comparable<Event> {
 	public String getCategory() { return this.category; }
 
 	public void setCategory(String category) { this.category = category; }
-
-	public long getTimeMillis() {
-		int colon = time.indexOf(':');
-		int hours = Integer.parseInt( time.substring(0, colon) );
-		if (hours == 0) hours = 24;
-		int mins = Integer.parseInt( time.substring(colon+1) );
-		return ((hours * 60) + mins) * 60 * 1000;
-	}
-
-	public Date getTimeDate() {
-		Date date = new Date();
-		date.setTime(getTimeMillis());
-		return date;
-	}
 
     @Override
     public int compareTo(Event other) {

@@ -37,7 +37,7 @@ public class EventList extends ArrayList<Event> {
         Date fifteenMinutesFromNow = new Date();
         fifteenMinutesFromNow.setTime((new Date()).getTime() + (15 * MINS_TO_MILLIS));
         for (Event e: this) {
-            if (e.getTimeDate().after(fifteenMinutesFromNow)) {
+            if (e.getTime().after(fifteenMinutesFromNow)) {
                 break;
             }
             i++;
@@ -80,7 +80,7 @@ public class EventList extends ArrayList<Event> {
         @Override
         public int compare(Event event, Event event2) {
             // Transfer comparing task to the compareTo method of the Date class
-            return (int)(event.getTimeMillis() - event2.getTimeMillis());
+            return (int)(event.getTime().getTime() - event2.getEndTime().getTime());
         }
     }
 

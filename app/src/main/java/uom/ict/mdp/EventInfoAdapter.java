@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -45,7 +46,8 @@ public class EventInfoAdapter extends ArrayAdapter<Event>{
         streetName.setText("Location: " + e.getLocation());
 
         TextView time = (TextView) convertView.findViewById(R.id.time_info);
-        time.setText("Time: " + e.getTime() + " - " + e.getEndTime());
+		SimpleDateFormat dateFormat = new SimpleDateFormat("K:mm");
+        time.setText("Time: " + dateFormat.format(e.getTime()) + " - " + dateFormat.format(e.getEndTime()));
 
         TextView ageText = (TextView) convertView.findViewById(R.id.category_info);
 		ageText.setText("Age Group: " + e.getAgeType());

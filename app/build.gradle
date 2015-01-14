@@ -34,4 +34,5 @@ dependencies {
     compile files('libs/guava-17.0.jar')
     compile files('libs/mobileservices-2.0.1-beta.jar')
     compile files('libs/mobileservices-2.0.1-beta-sources.jar')
+    compile files('libs/notifications-1.0.1.jar')
 }
