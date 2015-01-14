@@ -39,7 +39,6 @@ public class EventsListAdapter extends ArrayAdapter<Event> {
         ImageView eventIcon = (ImageView) convertView.findViewById(R.id.activity_icon);
         eventIcon.setImageResource(objects.get(position).getIcon());
 
-
         TextView eventName = (TextView) convertView.findViewById(R.id.event_name);
         eventName.setText(objects.get(position).getName());
 

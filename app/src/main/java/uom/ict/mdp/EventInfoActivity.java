@@ -85,20 +85,21 @@ public class EventInfoActivity extends FragmentActivity {
         TextView locationText = (TextView) findViewById(R.id.street_name_info);
         locationText.setText(location);
 
-        // -- START TIME -- //
+        // -- TIME -- //
         String startTime = i.getStringExtra(MainActivity.START_TIME);
-        TextView startText= (TextView) findViewById(R.id.start_time_info);
-        startText.setText("Start Time:" + startTime);
+		String endTime = i.getStringExtra(MainActivity.END_TIME);
+        TextView timeText= (TextView) findViewById(R.id.time_info);
+		timeText.setText("Time: " + startTime + " - " + endTime);
 
-        // -- END TIME -- //
-        String endTime = i.getStringExtra(MainActivity.END_TIME);
-        TextView endText = (TextView) findViewById(R.id.end_time_info);
-        endText.setText("End Time:"+endTime);
+        // -- AGE GROUP -- //
+        String ageGroup = i.getStringExtra(MainActivity.AGE_GROUP);
+        TextView ageGroupText= (TextView) findViewById(R.id.age_info);
+		ageGroupText.setText("Age Group: " + ageGroup);
 
-        // -- CATEGORY -- //
-        String category = i.getStringExtra(MainActivity.CATEGORY);
-        TextView categoryText= (TextView) findViewById(R.id.category_info);
-        categoryText.setText("Age Group:" + category);
+		// -- CATEGORY GROUP -- //
+		String category = i.getStringExtra(MainActivity.CATEGORY);
+		TextView categoryText = (TextView) findViewById(R.id.category_info);
+		categoryText.setText("Category: " + category);
 
 		// -- GOOGLE MAP -- //
 

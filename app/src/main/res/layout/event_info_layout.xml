@@ -31,22 +31,22 @@
         />
 
     <TextView
-        android:id="@+id/start_time_info"
+        android:id="@+id/time_info"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Start Time:"
+        android:text="Time:"
         android:textSize="32dp"
         android:gravity="center_horizontal"
         />
 
     <TextView
-        android:id="@+id/end_time_info"
+        android:id="@+id/age_info"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="End Time:"
+        android:text="Age Group:"
         android:textSize="32dp"
         android:gravity="center_horizontal"
-        />
+    />
 
     <TextView
         android:id="@+id/category_info"
@@ -57,42 +57,15 @@
         android:gravity="center_horizontal"
         />
 
-
-    <!-- Scrollable images  -->
-
-    <HorizontalScrollView
-        android:layout_margin="20dp"
-        android:layout_width="fill_parent"
-        android:layout_height="250dp">
-
-    <ImageView
-        android:id="@+id/image_info"
-        android:layout_width="320dp"
-        android:layout_height="250dp"
-        android:layout_gravity="center"
-        android:scaleType="fitXY"/>
-
-    </HorizontalScrollView>
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Description"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:textSize="32dp"/>
-
-
-
     <TextView
         android:id="@+id/description_info"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:text="Description"
         android:textSize="28dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         />
-
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/location_map"
@@ -102,15 +75,11 @@
         android:layout_height="400dp"
         class="uom.ict.mdp.MapUIControls" />
 
-
     <ImageView
         android:id="@+id/transparent_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@android:color/transparent"/>
-
-
-
 
 </LinearLayout>
 </ScrollView>
